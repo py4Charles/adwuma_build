@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./styles/global.css"
 
-import ArtisanCard from "./components/ArtisanCard"
+import ArtisanCard from "./components/ArtisanCard.jsx"
 import Homepage from "./pages/Homepage.jsx"
 
 const App = () => {
