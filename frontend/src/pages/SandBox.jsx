@@ -28,3 +28,5 @@ const SandBox = () => {
         </div>
     );
 };
+
+export default SandBox;
