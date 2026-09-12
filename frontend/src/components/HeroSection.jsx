@@ -59,6 +59,12 @@ const HeroSection = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Modern Decor Accents */}
+            <div className="hero-visual-accents">
+                <div className="accent-line"></div>
+                <div className="accent-circle"></div>
+            </div>
         </section>
     );
 };
