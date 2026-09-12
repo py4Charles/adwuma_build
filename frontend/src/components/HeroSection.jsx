@@ -42,6 +42,22 @@ const HeroSection = () => {
                         Learn More
                     </Link>
                 </div>
+
+                {/* Feature Micro-Chips */}
+                <div className="feature-chips">
+                    <div className="chip">
+                        <span className="chip-dot"></span>
+                        Verified Pros
+                    </div>
+                    <div className="chip">
+                        <span className="chip-dot"></span>
+                        Secure Escrow
+                    </div>
+                    <div className="chip">
+                        <span className="chip-dot"></span>
+                        24/7 Support
+                    </div>
+                </div>
             </div>
         </section>
     );
