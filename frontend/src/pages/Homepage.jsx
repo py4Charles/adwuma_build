@@ -23,6 +23,8 @@ const Homepage = () => {
                     </h2>
                 </section>
             </main>
+
+            <Footer/>
         </div>
     );
 };

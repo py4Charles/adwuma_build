@@ -10,6 +10,8 @@ const App = () => {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Homepage />} />
+
+
                 {import.meta.env.DEV && (
                     <Route path="/sandbox" element={<SandBox />} />
                 )}
