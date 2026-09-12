@@ -6,7 +6,7 @@ const Navbar = () => {
         <header className="navbar">
             <Link to="/" className="navbar-brand">
                 <img src={logo} alt="Adwuma Logo" className="navbar-logo" />
-                <span className="navbar-brand-text">CraftLink</span>
+                <span className="navbar-brand-text">Adwuma</span>
             </Link>
 
             <nav className="navbar-links">
