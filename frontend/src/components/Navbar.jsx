@@ -5,7 +5,7 @@ const Navbar = () => {
     return (
         <header className="navbar">
             <Link to="/" className="navbar-brand">
-                <img src={logo} alt="CraftLink Logo" className="navbar-logo" />
+                <img src={logo} alt="Adwuma Logo" className="navbar-logo" />
                 <span className="navbar-brand-text">CraftLink</span>
             </Link>
 
