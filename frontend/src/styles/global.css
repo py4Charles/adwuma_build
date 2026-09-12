@@ -136,3 +136,49 @@ a{
 .navbar-auth .login-btn:hover {
   color: var(--color-gold);
 }
+
+.navbar-auth .signup-btn {
+  background: var(--color-gold);
+  color: var(--color-bg);
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.navbar-auth .signup-btn:hover {
+  background: var(--color-gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+}
+
+.navbar-links a {
+  color: var(--color-text-muted);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.navbar-links a:hover {
+  color: var(--color-gold);
+}
+
+.navbar-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-gold);
+  transition: width 0.3s ease;
+}
+
+.navbar-links a:hover::after {
+  width: 100%;
+}
+
+.rating-stars {
+  color: var(--color-gold);
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+}
