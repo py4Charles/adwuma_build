@@ -271,3 +271,39 @@
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--color-gold));
 }
+
+.accent-circle {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--color-gold);
+  border-radius: 50%;
+}
+
+@media (max-width: 968px) {
+  .hero-section {
+    padding: 80px 40px;
+    min-height: 70vh;
+    border-radius: 0;
+    margin: 0;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+  }
+
+  .hero-description {
+    font-size: 1.2rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .btn-premium {
+    justify-content: center;
+  }
+
+  .hero-visual-accents {
+    display: none;
+  }
+}
