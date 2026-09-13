@@ -388,3 +388,16 @@
   letter-spacing: 1.5px;
   font-weight: 600;
 }
+
+@media (max-width: 768px) {
+  .stats-bar {
+    flex-direction: column;
+    gap: 30px;
+    margin: -20px 20px 40px;
+    padding: 40px 20px;
+  }
+  
+  .stat-item:not(:last-child)::after {
+    display: none;
+  }
+}
