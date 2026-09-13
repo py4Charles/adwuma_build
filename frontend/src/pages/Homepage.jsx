@@ -66,6 +66,22 @@ const Homepage = () => {
                     <p style={{ color: "var(--color-text-muted)", marginTop: "-10px" }}>
                         Getting the <span style={{ color: "var(--color-gold)" }}>right</span> person for the <span style={{ color: "var(--color-gold)" }}>right</span> job becomes simple and fast.
                     </p>
+
+                    <div style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(250px,1fr))",
+                        gap: "30px",
+                        maxWidth: "900px",
+                        margin: "0 auto"
+                    }}>
+
+                        <div style={{ background: "var(--color-surface-2)", padding: "30px", borderRadius: "16px" }}>
+                            <h3 style={{ marginBottom: "10px" }}>1. Post Your Job</h3>
+                            <p style={{ color: "var(--color-text-dim)" }}>
+                                Describe the service you need and submit your request.
+                            </p>
+                        </div>
+                    </div>
                 </section>
             </main>
 
