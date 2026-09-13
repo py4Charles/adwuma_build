@@ -97,6 +97,20 @@ const Homepage = () => {
                         </div>
                     </div>
                 </section>
+
+                <div style={{ maxWidth: '1024px', margin: '0 auto', padding: '0 16px' }}>
+
+                    {/* Overlapping Quick Services Layout (Inspired by Telerik ref) */}
+                    <section style={{
+                        transform: 'translateY(-100px)',
+                        position: 'relative',
+                        zIndex: 10,
+                        marginBottom: '-40px'
+                    }}>
+
+                    </section>
+                    
+                </div>
             </main>
 
             <Footer />
