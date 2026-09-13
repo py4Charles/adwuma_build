@@ -19,7 +19,7 @@ const Homepage = () => {
                 <section style={{ padding: "80px 20px", textAlign: "center" }}>
 
                     <h2 style={{ fontSize: "2.5rem", marginBottom: "12px", color: "var(--color-text-main)" }}>
-                        How It <span style={{ color: "var(--color-gold)" }}>Works</span>
+                        It <span style={{ color: "var(--color-gold)" }}>works</span> when we come Together
                     </h2>
                 </section>
             </main>

@@ -1,5 +1,6 @@
 import ArtisanCard from "../components/ArtisanCard";
 import RatingStars from "../components/RatingStars";
+import ServiceCard from "../components/ServiceCard";
 
 const SandBox = () => {
     return (
@@ -24,7 +25,8 @@ const SandBox = () => {
                 price={400}
                 distance={1.2} />
             
-            <RatingStars/>
+            <RatingStars />
+            <ServiceCard/>
         </div>
     );
 };
