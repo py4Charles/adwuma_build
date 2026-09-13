@@ -13,7 +13,7 @@ const ArtisanCard = ({ id, name, category, location, rating, image, price, dista
         <div className="artisan-info">
           <h3>{name}</h3>
           <p className="artisan-category">{category}</p>
-          <p className="artisan-location">📍 {location} {distance && <span style={{color: 'var(--color-text-muted)', fontSize: '0.85rem'}}>({distance}km)</span>}</p>
+          <p className="artisan-location">{location && <p>📍 {location}</p>} {distance && <span style={{color: 'var(--color-text-muted)', fontSize: '0.85rem'}}>({distance}km)</span>}</p>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '4px' }}>
             <RatingStars value={rating} />
             {price && <span style={{ color: 'var(--color-gold)', fontWeight: 'bold' }}>GHS {price}</span>}
