@@ -44,9 +44,9 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(
-    105deg, 
-    rgba(0,0,0,0.95) 0%, 
-    rgba(0,0,0,0.55) 50%, 
+    105deg,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 0, 0, 0.55) 50%,
     transparent 100%
   );
   z-index: 2;
@@ -89,14 +89,21 @@
 }
 
 @keyframes blob-float {
-  from { transform: translate(0, 0) scale(1); }
-  to { transform: translate(50px, 30px) scale(1.2); }
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(50px, 30px) scale(1.2);
+  }
 }
 
 .hero-grid-pattern {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 1px
+  );
   background-size: 40px 40px;
   z-index: 3;
   opacity: 0.5;
@@ -139,9 +146,15 @@
 }
 
 @keyframes shimmer {
-  0% { left: -100%; }
-  50% { left: 150%; }
-  100% { left: 150%; }
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 150%;
+  }
+  100% {
+    left: 150%;
+  }
 }
 
 .badge-icon {
@@ -312,7 +325,7 @@
   .hero-section {
     padding: 40px 24px;
   }
-  
+
   .hero-content h1 {
     font-size: 2.4rem;
   }
@@ -321,4 +334,14 @@
     flex-direction: column;
     align-items: stretch;
   }
+}
+
+.how-it-works {
+  transition: all 0.3s
+}
+
+.how-it-works:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
 }

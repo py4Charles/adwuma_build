@@ -75,10 +75,24 @@ const Homepage = () => {
                         margin: "0 auto"
                     }}>
 
-                        <div style={{ background: "var(--color-surface-2)", padding: "30px", borderRadius: "16px" }}>
+                        <div className="how-it-works" style={{ background: "var(--color-surface-2)", padding: "30px", borderRadius: "16px" }}>
                             <h3 style={{ marginBottom: "10px" }}>1. Post Your Job</h3>
                             <p style={{ color: "var(--color-text-dim)" }}>
                                 Describe the service you need and submit your request.
+                            </p>
+                        </div>
+
+                        <div className="how-it-works" style={{ background: "var(--color-surface-2)", padding: "30px", borderRadius: "16px" }}>
+                            <h3 style={{ marginBottom: "10px" }}>2. Get Matched</h3>
+                            <p style={{ color: "var(--color-text-dim)" }}>
+                                Skilled artisans near you respond quickly.
+                            </p>
+                        </div>
+
+                        <div className="how-it-works" style={{ background: "var(--color-surface-2)", padding: "30px", borderRadius: "16px" }}>
+                            <h3 style={{ marginBottom: "10px" }}>3. Hire the Best</h3>
+                            <p style={{ color: "var(--color-text-dim)" }}>
+                                Pick the artisan of your choice for the job.
                             </p>
                         </div>
                     </div>
