@@ -189,7 +189,7 @@ const Homepage = () => {
                             <img src={profile01} alt="profile-pic-Adobea" style={{borderRadius: "10px"}}/>
                             <div className="testimonial-rating">★★★★</div>
                             <p className="testimonial-content">
-                                "The best way to find a plumber in Accra. Fast and reliable service every time."
+                                The best way to find a plumber in Accra. Fast and reliable service every time.
                             </p>
                             <div className="testimonial-author">
                                 <div className="author-info">
