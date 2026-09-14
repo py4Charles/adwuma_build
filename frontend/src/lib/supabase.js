@@ -162,3 +162,71 @@ export const walletApi = {
       .order('created_at', { ascending: false });
   },
 };
+
+// ─── REVIEWS ─────────────────────────────────────────────────
+export const reviewsApi = {
+  /** Submit a review */
+  create: async ({ requestId, customerId, artisanId, rating, comment }) => {
+    return supabase
+      .from('reviews')
+      .insert({ request_id: requestId, customer_id: customerId, artisan_id: artisanId, rating, comment })
+      .select()
+      .single();
+  },
+
+  /** Get reviews for an artisan */
+  forArtisan: async (artisanId) => {
+    return supabase
+      .from('reviews')
+      .select('*, profiles(username, first_name, last_name)')
+      .eq('artisan_id', artisanId)
+      .order('created_at', { ascending: false });
+  },
+};
+
+// ─── SUPPORT TICKETS ─────────────────────────────────────────
+export const ticketsApi = {
+  /** Submit a new support ticket */
+  create: async ({ customerId, requestId, subjectType, description }) => {
+    return supabase
+      .from('support_tickets')
+      .insert({
+        customer_id: customerId,
+        request_id: requestId || null,
+        subject_type: subjectType,
+        description,
+        status: 'open',
+        last_update: 'Your ticket has been received. Our team will review it shortly.',
+      })
+      .select()
+      .single();
+  },
+
+  /** List tickets for the logged-in customer */
+  listMine: async (customerId) => {
+    return supabase
+      .from('support_tickets')
+      .select(`*, service_requests(title)`)
+      .eq('customer_id', customerId)
+      .order('created_at', { ascending: false });
+  },
+};
+
+// ─── NOTIFICATIONS ───────────────────────────────────────────
+export const notificationsApi = {
+  listMine: async (userId) => {
+    return supabase
+      .from('notifications')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false })
+      .limit(20);
+  },
+
+  markAllRead: async (userId) => {
+    return supabase
+      .from('notifications')
+      .update({ is_read: true })
+      .eq('user_id', userId);
+  },
+};
