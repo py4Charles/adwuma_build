@@ -44,6 +44,23 @@ const LoginPage = () => {
                     <h1 className="cl-login-title">Welcome Back</h1>
                     <p className="cl-login-subtitle">Sign in to continue to your account</p>
                 </div>
+
+                <div className="cl-login-toggle" style={{ marginBottom: "24px" }}>
+                    <button
+                        type="button"
+                        className={`cl-login-toggle__option ${accountType === "customer" ? "cl-login-toggle__option--active" : ""}`}
+                        onClick={() => setAccountType("customer")}
+                    >
+                        Customer
+                    </button>
+                    <button
+                        type="button"
+                        className={`cl-login-toggle__option ${accountType === "provider" ? "cl-login-toggle__option--active" : ""}`}
+                        onClick={() => setAccountType("provider")}
+                    >
+                        Service Provider
+                    </button>
+                </div>
             </div>
         </div>
     );
