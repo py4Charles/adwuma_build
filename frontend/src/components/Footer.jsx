@@ -6,9 +6,9 @@ const Footer = () => {
     return (
         <footer className="footer" style={{
             borderTop: 'none',
-            padding: '60px 24px',
+            padding: '60px 24px 0px 24px',
             background: 'linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%)',
-            color: 'var(--color-bg)'
+            color: 'var(--color-bg)',
         }}>
             <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px' }}>
                 <div>
@@ -33,6 +33,15 @@ const Footer = () => {
                         <Link to="/terms" style={{ color: 'rgba(0,0,0,0.7)', fontSize: '0.95rem', fontWeight: '500' }}>Terms of Service</Link>
                         <Link to="/privacy" style={{ color: 'rgba(0,0,0,0.7)', fontSize: '0.95rem', fontWeight: '500' }}>Privacy Policy</Link>
                     </div>
+                </div>
+
+            </div>
+            <div className="footer-rights">
+                <p>2026 Adwuma. All rights reserved</p>
+                <div className="footer-policy">
+                    <p>Privacy Policy</p>
+                    <p>Terms of Service</p>
+                    <p>Cookie Policy</p>
                 </div>
             </div>
         </footer>
