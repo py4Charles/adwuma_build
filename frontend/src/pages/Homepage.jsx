@@ -5,7 +5,15 @@ import Footer from "../components/Footer.jsx";
 import HeroSection from "../components/HeroSection.jsx";
 import ServiceCard from "../components/ServiceCard.jsx";
 import Counter from "../components/common/Counter.jsx";
+
 import logo from "../assets/icon.png"
+import profile01 from "../assets/profile-pics/profile-01.png";
+import profile02 from "../assets/profile-pics/profile-02.png";
+import profile03 from "../assets/profile-pics/profile-03.png";
+import profile04 from "../assets/profile-pics/profile-04.png";
+import profile05 from "../assets/profile-pics/profile-05.png";
+import profile06 from "../assets/profile-pics/profile-06.png";
+
 import "../styles/utils.css"
 import "../styles/categories.css"
 
@@ -178,9 +186,10 @@ const Homepage = () => {
 
                     <div className="testimonials-grid">
                         <div className="testimonial-card">
-                            <div className="testimonial-rating">★★★★★</div>
+                            <img src={profile01} alt="profile-pic-Adobea" style={{borderRadius: "10px"}}/>
+                            <div className="testimonial-rating">★★★★</div>
                             <p className="testimonial-content">
-                                The best way to find a plumber in Accra. Fast and reliable service every time.
+                                "The best way to find a plumber in Accra. Fast and reliable service every time."
                             </p>
                             <div className="testimonial-author">
                                 <div className="author-info">
@@ -191,6 +200,7 @@ const Homepage = () => {
                         </div>
 
                         <div className="testimonial-card">
+                            <img src={profile02} alt="profile-pic-Kofi" style={{borderRadius: "10px"}}/>
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 Found an amazing electrician within minutes. CraftLink is a lifesaver for home emergencies!
@@ -204,6 +214,7 @@ const Homepage = () => {
                         </div>
 
                         <div className="testimonial-card">
+                            <img src={profile03} alt="profile-pic-Sarah" style={{borderRadius: "10px"}}/>
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 Quality artisans are hard to find, but CraftLink makes it easy. I'll never go back to random calls.
@@ -217,6 +228,7 @@ const Homepage = () => {
                         </div>
 
                         <div className="testimonial-card">
+                            <img src={profile04} alt="profile-pic-John" style={{borderRadius: "10px"}}/>
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 I used the Flex service for a quick cleaning job and it was perfect. The matching was spot on.
@@ -230,6 +242,7 @@ const Homepage = () => {
                         </div>
 
                         <div className="testimonial-card">
+                            <img src={profile05} alt="profile-pic-Ama" style={{borderRadius: "10px"}}/>
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 Transparent pricing and verified reviews gave me peace of mind when hiring for my office setup.
@@ -243,6 +256,7 @@ const Homepage = () => {
                         </div>
 
                         <div className="testimonial-card">
+                            <img src={profile06} alt="profile-pic-Emmanuel" style={{borderRadius: "10px"}}/>
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 A game changer for local professionals. I've grown my business significantly since joining.
