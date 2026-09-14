@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/dashboard.css";
 import logo from "../assets/icon.png";
 import { useAuth } from "../context/AuthContext.jsx";
+import { authApi, artisansApi, requestsApi } from "../lib/supabase.js";
 
 const Icons = {
     Dashboard: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /></svg>,
@@ -43,7 +44,7 @@ const ArtisanDashboard = () => {
             ]);
             setArtisanProfile(ap);
             setOpenJobs(jobs || []);
-            setWallet(w);
+            // setWallet(w);
             setTransactions(txns || []);
             setLoading(false);
         };
@@ -279,43 +280,7 @@ const ArtisanDashboard = () => {
                 )}
 
                 {/* ─── EARNINGS ─── */}
-                {activeTab === "Earnings" && (
-                    <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-                        <h2 style={{ fontSize: "1.8rem", margin: 0 }}>Earnings Financial Hub</h2>
-                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.5rem" }}>
-                            <div style={{ background: "#111", padding: "2rem", borderRadius: "24px", border: "1px solid #222" }}>
-                                <p style={{ color: "#888", margin: "0 0 10px 0" }}>Total Balance</p>
-                                <h2 style={{ fontSize: "2.5rem", margin: "0 0 20px 0" }}>GHS {balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</h2>
-                                <button className="btn-primary" style={{ width: "100%", padding: "12px", opacity: balance === 0 ? 0.5 : 1 }} disabled={balance === 0}>
-                                    Request Payout
-                                </button>
-                            </div>
-                        </div>
-                        <div style={{ background: "#111", padding: "2rem", borderRadius: "24px", border: "1px solid #222" }}>
-                            <h3 style={{ margin: "0 0 1.5rem 0" }}>Recent Transactions</h3>
-                            {transactions.length === 0 ? (
-                                <p style={{ color: "#555", textAlign: "center", padding: "2rem 0" }}>No transaction history available.</p>
-                            ) : (
-                                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                                    {transactions.map((t) => (
-                                        <div key={t.id} style={{ display: "flex", justifyContent: "space-between", padding: "1rem", background: "#0a0a0a", borderRadius: "12px", border: "1px solid #222" }}>
-                                            <div>
-                                                <p style={{ margin: "0 0 4px 0", fontWeight: "bold" }}>{t.description}</p>
-                                                <span style={{ color: "#555", fontSize: "0.85rem" }}>{formatDate(t.created_at)}</span>
-                                            </div>
-                                            <div style={{ textAlign: "right" }}>
-                                                <p style={{ margin: "0 0 4px 0", color: t.type === "deposit" ? "#4caf50" : "#f44336", fontWeight: "bold" }}>
-                                                    {t.type === "deposit" ? "+" : "-"} GHS {Number(t.amount).toLocaleString()}
-                                                </p>
-                                                <span style={{ fontSize: "0.8rem", color: t.status === "success" ? "#4caf50" : "#888", textTransform: "capitalize" }}>{t.status}</span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                )}
+
 
                 {/* ─── PROFILE ─── */}
                 {activeTab === "Profile" && (
