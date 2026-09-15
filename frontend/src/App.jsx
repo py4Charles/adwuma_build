@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import "./styles/global.css"
 
 import Homepage from "./pages/Homepage.jsx"
 import SandBox from "./pages/SandBox.jsx"
@@ -10,7 +9,10 @@ import ArtisanDashboard from "./pages/ArtisanDashboard.jsx";
 import ArtisanProfilePage from "./pages/ArtisanProfilePage.jsx";
 import WalletPage from "./pages/WalletPage.jsx";
 import MyRequestsPage from "./pages/MyRequestsPage.jsx";
+import AccountSettingsPage from "./pages/AccountSettingsPage.jsx";
+
 import { AuthProvider } from "./context/AuthContext.jsx";
+import "./styles/global.css"
 
 const App = () => {
     return (
@@ -23,7 +25,8 @@ const App = () => {
                     <Route path="/provider-dashboard" element={<ArtisanDashboard />} />
                     <Route path="/artisans/:artisanId" element={<ArtisanProfilePage />} />
                     <Route path="/wallet" element={<WalletPage />} />
-                    <Route path="/my-requests" element={<MyRequestsPage/>} />
+                    <Route path="/my-requests" element={<MyRequestsPage />} />
+                    <Route path="/settings" element={<AccountSettingsPage/>} />
 
                     {import.meta.env.DEV && (
                         <Route path="/sandbox" element={<SandBox />} />
