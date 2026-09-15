@@ -162,7 +162,7 @@ const ComplaintsPage = ({ isEmbedded }) => {
                                 {submitting ? "Submitting…" : "Submit Support Ticket"}
                             </button>
                             <p style={{ textAlign: "center", color: "var(--color-text-muted)", fontSize: "0.85rem", marginTop: "1rem" }}>
-                                Our trust & safety team typically responds within 1-2 hours.
+                                Our trust & safety team responds within 1-2 hours.
                             </p>
                         </form>
                     </div>
