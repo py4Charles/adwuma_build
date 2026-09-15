@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 import { requestsApi } from "../lib/supabase.js";
-import "../styles/component.css";
+import "../styles/components.css";
 
 const STATUS_COLORS = {
     in_progress: "#d4af37",
