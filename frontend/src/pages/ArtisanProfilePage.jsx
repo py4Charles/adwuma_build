@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import RatingStars from "../components/RatingStars.jsx";
-import "../styles/component.css";
+import "../styles/components.css";
 
 const ArtisanProfilePage = () => {
     return (
