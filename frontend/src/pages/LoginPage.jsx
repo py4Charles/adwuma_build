@@ -42,7 +42,7 @@ const LoginPage = () => {
                         <div className="cl-login-logo">Adwuma</div>
                     </div>
                     <h1 className="cl-login-title">Welcome Back</h1>
-                    <p className="cl-login-subtitle">Sign in to continue to your account</p>
+                    <p className="cl-login-subtitle">{ accountType === "customer" ? "Sign in to continue to your account" : "Sign in to continue to your company"}</p>
                 </div>
 
                 <div className="cl-login-toggle" style={{ marginBottom: "24px" }}>

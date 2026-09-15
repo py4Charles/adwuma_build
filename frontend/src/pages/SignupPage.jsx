@@ -60,7 +60,7 @@ const SignupPage = () => {
                         <div className="cl-login-logo">Adwuma</div>
                     </div>
                     <h1 className="cl-login-title">Create Account</h1>
-                    <p className="cl-login-subtitle">Join Adwuma and find the best artisans</p>
+                    <p className="cl-login-subtitle">{accountType === "provider" ? "Join Adwuma to grow your business" : "Join Adwuma to find the best Artisans"}</p>
                 </div>
 
                 <div className="cl-login-toggle" style={{ marginBottom: "24px" }}>
