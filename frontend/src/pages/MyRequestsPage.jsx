@@ -56,7 +56,8 @@ const MyRequestsPage = ({isEmbedded}) => {
                 className={isEmbedded ? "" : "page-content"}
                 style={{ maxWidth: "900px", margin: "0 auto", width: "100%", padding: isEmbedded ? "0" : "2rem 1rem", minHeight: isEmbedded ? "auto" : "70vh" }}
             >
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
+                <div style={{ display: "flex", gap: "50%", marginBottom: "2rem" }}>
+                {/* <div style={{ display: "grid", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}> */}
                     <h1 style={{ fontSize: isEmbedded ? "1.8rem" : "2rem", color: "var(--color-text-main)", margin: 0 }}>
                         My Requests
                     </h1>
