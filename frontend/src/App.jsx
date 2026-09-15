@@ -7,22 +7,26 @@ import SandBox from "./pages/SandBox.jsx"
 import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import ArtisanDashboard from "./pages/ArtisanDashboard.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 
 const App = () => {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/signup" element={<SignupPage />} />
-                <Route path="/provider-dashboard" element={<ArtisanDashboard />} />
+        <AuthProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<Homepage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/signup" element={<SignupPage />} />
+                    <Route path="/provider-dashboard" element={<ArtisanDashboard />} />
 
 
-                {import.meta.env.DEV && (
-                    <Route path="/sandbox" element={<SandBox />} />
-                )}
-            </Routes>
-        </BrowserRouter>
+                    {import.meta.env.DEV && (
+                        <Route path="/sandbox" element={<SandBox />} />
+                    )}
+                </Routes>
+            </BrowserRouter>
+        </AuthProvider>
+
     );
 };
 
