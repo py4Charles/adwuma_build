@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
-import { walletApi } from "../lib/supabase";
+import { walletApi } from "../lib/supabase.js";
 import "../styles/components.css";
 
 const WalletPage = () => {
