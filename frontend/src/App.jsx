@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import ArtisanDashboard from "./pages/ArtisanDashboard.jsx";
 import ArtisanProfilePage from "./pages/ArtisanProfilePage.jsx";
+import WalletPage from "./pages/WalletPage.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 
 const App = () => {
@@ -20,7 +21,7 @@ const App = () => {
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/provider-dashboard" element={<ArtisanDashboard />} />
                     <Route path="/artisans/:artisanId" element={<ArtisanProfilePage />} />
-
+                    <Route path="/wallet" element={<WalletPage/>} />
 
                     {import.meta.env.DEV && (
                         <Route path="/sandbox" element={<SandBox />} />

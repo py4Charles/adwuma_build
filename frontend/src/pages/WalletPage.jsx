@@ -230,7 +230,7 @@ const WalletPage = ({isEmbedded}) => {
                                     placeholder="e.g. 100"
                                     value={fundAmount}
                                     onChange={(e) => setFundAmount(e.target.value)}
-                                    style={{ background: "var(--color-surface)", fontSize: "1.2rem" }}
+                                    style={{ background: "var(--color-surface)", fontSize: "1.2rem", color: "var(--color-surface)" }}
                                     required
                                 />
                             </div>
