@@ -8,13 +8,15 @@
   flex-direction: column;
   gap: 20px;
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .artisan-card:hover {
   transform: translateY(-6px);
   border-color: rgba(212, 175, 55, 0.4);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.1);
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba(212, 175, 55, 0.1);
 }
 
 .artisan-header {
@@ -138,7 +140,9 @@
   font-weight: 500;
 }
 
-.form-input, .form-select, .form-textarea {
+.form-input,
+.form-select,
+.form-textarea {
   width: 100%;
   padding: 16px 20px;
   border-radius: 14px;
@@ -150,7 +154,9 @@
   font-family: inherit;
 }
 
-.form-input:focus, .form-select:focus, .form-textarea:focus {
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
   outline: none;
   border-color: var(--color-gold);
   box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
@@ -183,7 +189,11 @@
 /* Artisan Profile Layout */
 .profile-cover {
   height: 200px;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, var(--color-surface-2) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 0.15) 0%,
+    var(--color-surface-2) 100%
+  );
   border-radius: 24px 24px 0 0;
   position: relative;
   margin-bottom: 70px;
@@ -206,7 +216,7 @@
   font-size: 3rem;
   color: var(--color-gold);
   font-weight: bold;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .profile-content {
@@ -215,7 +225,7 @@
   padding: 0 40px 40px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   margin-bottom: 32px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .profile-name {
@@ -260,7 +270,11 @@
   height: 200px;
   margin: 40px auto;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(212, 175, 55, 0.1) 0%,
+    transparent 70%
+  );
   border: 2px solid rgba(212, 175, 55, 0.3);
   display: flex;
   align-items: center;
@@ -274,7 +288,11 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: conic-gradient(from 0deg, transparent 70%, rgba(212, 175, 55, 0.8) 100%);
+  background: conic-gradient(
+    from 0deg,
+    transparent 70%,
+    rgba(212, 175, 55, 0.8) 100%
+  );
   animation: radar-spin 2s linear infinite;
 }
 
@@ -288,13 +306,23 @@
 }
 
 @keyframes radar-spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes radar-pulse {
-  0% { transform: scale(0.5); opacity: 1; }
-  100% { transform: scale(1.5); opacity: 0; }
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
 }
 
 .modal-overlay {
@@ -320,22 +348,43 @@
   max-width: 450px;
   padding: 32px;
   text-align: center;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(212, 175, 55, 0.15);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(212, 175, 55, 0.15);
   animation: slideUp 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-  from { transform: translateY(40px) scale(0.95); opacity: 0; }
-  to { transform: translateY(0) scale(1); opacity: 1; }
+  from {
+    transform: translateY(40px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes mapPulse {
-  0% { transform: scale(1); opacity: 0.8; }
-  50% { transform: scale(1.5); opacity: 0; }
-  100% { transform: scale(1); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
 }

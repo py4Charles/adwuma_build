@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
-import "../styles/componens.css";
+import "../styles/components.css";
 import { useAuth } from "../context/AuthContext.jsx";
 import { ticketsApi, requestsApi } from "../lib/supabase.js";
 
