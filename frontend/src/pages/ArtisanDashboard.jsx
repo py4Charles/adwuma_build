@@ -280,13 +280,49 @@ const ArtisanDashboard = () => {
                 )}
 
                 {/* ─── EARNINGS ─── */}
-
+                {activeTab === "Earnings" && (
+                    <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+                        <h2 style={{ fontSize: "1.8rem", margin: 0 }}>Earnings Financial Hub</h2>
+                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.5rem" }}>
+                            <div style={{ background: "#111", padding: "2rem", borderRadius: "24px", border: "1px solid #222" }}>
+                                <p style={{ color: "#888", margin: "0 0 10px 0" }}>Total Balance</p>
+                                <h2 style={{ fontSize: "2.5rem", margin: "0 0 20px 0" }}>GHS {balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</h2>
+                                <button className="btn-primary" style={{ width: "100%", padding: "12px", opacity: balance === 0 ? 0.5 : 1 }} disabled={balance === 0}>
+                                    Request Payout
+                                </button>
+                            </div>
+                        </div>
+                        <div style={{ background: "#111", padding: "2rem", borderRadius: "24px", border: "1px solid #222" }}>
+                            <h3 style={{ margin: "0 0 1.5rem 0" }}>Recent Transactions</h3>
+                            {transactions.length === 0 ? (
+                                <p style={{ color: "#555", textAlign: "center", padding: "2rem 0" }}>No transaction history available.</p>
+                            ) : (
+                                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                                    {transactions.map((t) => (
+                                        <div key={t.id} style={{ display: "flex", justifyContent: "space-between", padding: "1rem", background: "#0a0a0a", borderRadius: "12px", border: "1px solid #222" }}>
+                                            <div>
+                                                <p style={{ margin: "0 0 4px 0", fontWeight: "bold" }}>{t.description}</p>
+                                                <span style={{ color: "#555", fontSize: "0.85rem" }}>{formatDate(t.created_at)}</span>
+                                            </div>
+                                            <div style={{ textAlign: "right" }}>
+                                                <p style={{ margin: "0 0 4px 0", color: t.type === "deposit" ? "#4caf50" : "#f44336", fontWeight: "bold" }}>
+                                                    {t.type === "deposit" ? "+" : "-"} GHS {Number(t.amount).toLocaleString()}
+                                                </p>
+                                                <span style={{ fontSize: "0.8rem", color: t.status === "success" ? "#4caf50" : "#888", textTransform: "capitalize" }}>{t.status}</span>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
 
                 {/* ─── PROFILE ─── */}
                 {activeTab === "Profile" && (
                     <div>
                         <h2 style={{ fontSize: "1.8rem", margin: "0 0 2rem 0" }}>Provider Profile</h2>
-                        <div style={{ background: "#111", padding: "2rem", borderRadius: "24px", border: "1px solid #222", maxWidth: "600px" }}>
+                        <div style={{ background: "#111", padding: "2rem", borderRadius: "24px", border: "1px solid #222", maxWidth: "100%" }}>
                             <div style={{ textAlign: "center", marginBottom: "2rem" }}>
                                 <div style={{ width: "100px", height: "100px", borderRadius: "50%", background: "var(--color-gold)", margin: "0 auto 1rem", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2.5rem", fontWeight: "bold", color: "black" }}>
                                     {artisanName.substring(0, 2).toUpperCase()}
