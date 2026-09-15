@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 import { walletApi } from "../lib/supabase.js";
 import "../styles/components.css";
 
-const WalletPage = () => {
+const WalletPage = ({isEmbedded}) => {
     const { user } = useAuth();
     const [wallet, setWallet] = useState(null);
     const [transactions, setTransactions] = useState([]);

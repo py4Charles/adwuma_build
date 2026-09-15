@@ -21,7 +21,7 @@ const STATUS_LABELS = {
 };
 
 
-const MyRequestsPage = () => {
+const MyRequestsPage = ({isEmbedded}) => {
     const { user } = useAuth();
     const [filter, setFilter] = useState("All");
     const [requests, setRequests] = useState([]);
