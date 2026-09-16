@@ -123,6 +123,39 @@ export const requestsApi = {
     },
 };
 
+// ─── MESSAGES ────────────────────────────────────────────────
+export const messagesApi = {
+  /** Fetch all messages for a request */
+  list: async (requestId) => {
+    return supabase
+      .from('messages')
+      .select('*, sender:profiles(username, first_name, last_name, avatar_url)')
+      .eq('request_id', requestId)
+      .order('created_at', { ascending: true });
+  },
+
+  /** Send a message */
+  send: async ({ requestId, senderId, text }) => {
+    return supabase
+      .from('messages')
+      .insert({ request_id: requestId, sender_id: senderId, text })
+      .select()
+      .single();
+  },
+
+  /** Subscribe to new messages for a request (real-time) */
+  subscribe: (requestId, callback) => {
+    return supabase
+      .channel(`messages:${requestId}`)
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'messages', filter: `request_id=eq.${requestId}` },
+        callback
+      )
+      .subscribe();
+  },
+};
+
 // ─── WALLET ──────────────────────────────────────────────────
 export const walletApi = {
   /** Get wallet balance */
