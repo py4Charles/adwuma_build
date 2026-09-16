@@ -16,6 +16,7 @@ import AboutPage from "./pages/AboutPage.jsx";
 import CategoriesPage from "./pages/CategoriesPage.jsx";
 import CategorySearchResultsPage from "./pages/CategorySearchResultsPage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
 
 import { AuthProvider } from "./context/AuthContext.jsx";
 import "./styles/global.css"
@@ -38,7 +39,8 @@ const App = () => {
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/categories" element={<CategoriesPage />} />
                     <Route path="/search" element={<CategorySearchResultsPage />} />
-                    <Route path="/chat/:chatId" element={<ChatPage/>} />
+                    <Route path="/chat/:chatId" element={<ChatPage />} />
+                    <Route path="/contact" element={<ContactPage/>} />
 
                     {import.meta.env.DEV && (
                         <Route path="/sandbox" element={<SandBox />} />
