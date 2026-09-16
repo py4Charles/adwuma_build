@@ -8,7 +8,7 @@ const AboutPage = () => {
         <div className="page">
             <Navbar />
             <main className="page-content" style={{ maxWidth: '1000px', paddingBottom: '80px' }}>
-                <div className="text-header-back" style={{width: '100%', background: 'var(--color-gold)'}}>
+                <div className="text-header" style={{maxWidth: '1200px'}}>
                     <h1>About <span>Adwuma</span></h1>
                     <p>Elevating the standard of service connections.</p>
                 </div>
