@@ -41,7 +41,7 @@ const serviceCategories = [
     }
 ];
 
-const Categories = () => {
+const CategoriesPage = () => {
     return (
         <div className="page">
             <Navbar />
@@ -62,4 +62,4 @@ const Categories = () => {
     );
 };
 
-export default Categories;
+export default CategoriesPage;
