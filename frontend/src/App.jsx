@@ -17,36 +17,41 @@ import CategoriesPage from "./pages/CategoriesPage.jsx";
 import CategorySearchResultsPage from "./pages/CategorySearchResultsPage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
+import FlexMatchPage from "./pages/FlexMatchPage.jsx";
 
 import { AuthProvider } from "./context/AuthContext.jsx";
+import { ToastProvider } from "./context/ToastContext.jsx";
 import "./styles/global.css"
 
 const App = () => {
     return (
         <AuthProvider>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Homepage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/signup" element={<SignupPage />} />
-                    <Route path="/provider-dashboard" element={<ArtisanDashboard />} />
-                    <Route path="/artisans/:artisanId" element={<ArtisanProfilePage />} />
-                    <Route path="/wallet" element={<WalletPage />} />
-                    <Route path="/my-requests" element={<MyRequestsPage />} />
-                    <Route path="/settings" element={<AccountSettingsPage />} />
-                    <Route path="/complaints" element={<ComplaintsPage />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/about" element={<AboutPage />} />
-                    <Route path="/categories" element={<CategoriesPage />} />
-                    <Route path="/search" element={<CategorySearchResultsPage />} />
-                    <Route path="/chat/:chatId" element={<ChatPage />} />
-                    <Route path="/contact" element={<ContactPage/>} />
+            <ToastProvider>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Homepage />} />
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/signup" element={<SignupPage />} />
+                        <Route path="/provider-dashboard" element={<ArtisanDashboard />} />
+                        <Route path="/artisans/:artisanId" element={<ArtisanProfilePage />} />
+                        <Route path="/wallet" element={<WalletPage />} />
+                        <Route path="/my-requests" element={<MyRequestsPage />} />
+                        <Route path="/settings" element={<AccountSettingsPage />} />
+                        <Route path="/complaints" element={<ComplaintsPage />} />
+                        <Route path="/dashboard" element={<Dashboard />} />
+                        <Route path="/about" element={<AboutPage />} />
+                        <Route path="/categories" element={<CategoriesPage />} />
+                        <Route path="/search" element={<CategorySearchResultsPage />} />
+                        <Route path="/chat/:chatId" element={<ChatPage />} />
+                        <Route path="/contact" element={<ContactPage />} />
+                        <Route path="/flex-match" element={<FlexMatchPage />} />
 
-                    {import.meta.env.DEV && (
-                        <Route path="/sandbox" element={<SandBox />} />
-                    )}
-                </Routes>
-            </BrowserRouter>
+                        {import.meta.env.DEV && (
+                            <Route path="/sandbox" element={<SandBox />} />
+                        )}
+                    </Routes>
+                </BrowserRouter>
+            </ToastProvider>
         </AuthProvider>
 
     );
