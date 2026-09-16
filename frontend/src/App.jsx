@@ -18,6 +18,7 @@ import CategorySearchResultsPage from "./pages/CategorySearchResultsPage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 import FlexMatchPage from "./pages/FlexMatchPage.jsx";
+import FlexRequestFormPage from "./pages/FlexRequestFormPage.jsx";
 
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { ToastProvider } from "./context/ToastContext.jsx";
@@ -45,6 +46,7 @@ const App = () => {
                         <Route path="/chat/:chatId" element={<ChatPage />} />
                         <Route path="/contact" element={<ContactPage />} />
                         <Route path="/flex-match" element={<FlexMatchPage />} />
+                        <Route path="flex-request" element={<FlexRequestFormPage/>} />
 
                         {import.meta.env.DEV && (
                             <Route path="/sandbox" element={<SandBox />} />
