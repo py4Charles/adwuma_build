@@ -318,8 +318,8 @@ const Dashboard = () => {
             {/* SIDEBAR NAVIGATION (LEFT SIDE) */}
             <aside className="dashboard-sidebar">
                 <Link to="/" className="sidebar-logo" style={{ textDecoration: 'none' }}>
-                    <img src={logo} alt="CraftLink Logo" style={{ width: '32px', height: '32px', objectFit: 'contain' }} />
-                    <span>CraftLink</span>
+                    <img src={logo} alt="Adwuma Logo" style={{ width: 'auto', height: '50px', objectFit: 'contain' }} />
+                    <span>Adwuma</span>
                 </Link>
 
                 <nav className="sidebar-menu">
