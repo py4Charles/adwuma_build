@@ -52,7 +52,8 @@ const App = () => {
                         <Route path="flex-request" element={<FlexRequestFormPage />} />
                         <Route path="/review/:artisanId" element={<ReviewPage />} />
                         <Route path="/service-request" element={<ServiceRequestPage />} />
-                        <Route path="*" element={<Navigate to="/" replace/>} />
+                        <Route path="/404" element={<NotFound/>} />
+                        <Route path="*" element={<Navigate to="/404" replace/>} />
 
                         {import.meta.env.DEV && (
                             <Route path="/sandbox" element={<SandBox />} />
