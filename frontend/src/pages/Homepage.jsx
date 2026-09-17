@@ -36,13 +36,13 @@ const Homepage = () => {
 
                     <div style={{
                         display: "grid",
-                        gridTemplateColumns: "(350px, 500px)",
-                        maxWidth: "1000px",
-                        // margin: "0 auto 50px auto",
-                        verticalAlign: ""
+                        gridTemplateColumns: "repeat(auto-fit, minmax(min(250px, 100%), 1fr))",
+                        gap: "2.5rem",                
+                        maxWidth: "1200px",
+                        margin: "0px 0px 50px 0px",
                     }}>
 
-                        <img src={logo} alt="Adwuma logo" />
+                        <img src={logo} alt="Adwuma logo" className="homepage-logo"/>
 
                         <p style={{ color: "var(--color-text-dim)", marginLeft: "20px" }}>
                             <span style={{ fontSize: "50px", }}>A</span>dwuma is an initiative by the Motion group of companies. Mainly made
@@ -185,7 +185,7 @@ const Homepage = () => {
 
                     <div className="testimonials-grid">
                         <div className="testimonial-card">
-                            <img src={profile01} alt="profile-pic-Adobea" style={{borderRadius: "10px"}}/>
+                            <img src={profile01} alt="profile-pic-Adobea" style={{ borderRadius: "10px" }} />
                             <div className="testimonial-rating">★★★★</div>
                             <p className="testimonial-content">
                                 The best way to find a plumber in Accra. Fast and reliable service every time.
@@ -199,7 +199,7 @@ const Homepage = () => {
                         </div>
 
                         <div className="testimonial-card">
-                            <img src={profile02} alt="profile-pic-Kofi" style={{borderRadius: "10px"}}/>
+                            <img src={profile02} alt="profile-pic-Kofi" style={{ borderRadius: "10px" }} />
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 Found an amazing electrician within minutes. CraftLink is a lifesaver for home emergencies!
@@ -213,7 +213,7 @@ const Homepage = () => {
                         </div>
 
                         <div className="testimonial-card">
-                            <img src={profile03} alt="profile-pic-Sarah" style={{borderRadius: "10px"}}/>
+                            <img src={profile03} alt="profile-pic-Sarah" style={{ borderRadius: "10px" }} />
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 Quality artisans are hard to find, but CraftLink makes it easy. I'll never go back to random calls.
@@ -227,7 +227,7 @@ const Homepage = () => {
                         </div>
 
                         <div className="testimonial-card">
-                            <img src={profile04} alt="profile-pic-John" style={{borderRadius: "10px"}}/>
+                            <img src={profile04} alt="profile-pic-John" style={{ borderRadius: "10px" }} />
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 I used the Flex service for a quick cleaning job and it was perfect. The matching was spot on.
@@ -241,7 +241,7 @@ const Homepage = () => {
                         </div>
 
                         <div className="testimonial-card">
-                            <img src={profile05} alt="profile-pic-Ama" style={{borderRadius: "10px"}}/>
+                            <img src={profile05} alt="profile-pic-Ama" style={{ borderRadius: "10px" }} />
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 Transparent pricing and verified reviews gave me peace of mind when hiring for my office setup.
@@ -255,7 +255,7 @@ const Homepage = () => {
                         </div>
 
                         <div className="testimonial-card">
-                            <img src={profile06} alt="profile-pic-Emmanuel" style={{borderRadius: "10px"}}/>
+                            <img src={profile06} alt="profile-pic-Emmanuel" style={{ borderRadius: "10px" }} />
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 A game changer for local professionals. I've grown my business significantly since joining.

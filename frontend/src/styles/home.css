@@ -289,6 +289,11 @@
   border-radius: 50%;
 }
 
+.homepage-logo{
+  height: 770px;
+  width: auto;
+}
+
 @media (max-width: 968px) {
   .hero-section {
     padding: 80px 40px;
