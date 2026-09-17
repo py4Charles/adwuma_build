@@ -1,14 +1,30 @@
 :root {
-  --color-gold: #d4af37;
-  --color-gold-light: #e5cd6c;
-  --color-gold-dark: #b59228;
-  --color-bg: #000000;
-  --color-surface-1: #0a0a0a;
-  --color-surface-2: #111111;
-  --color-surface-3: #1a1a1a;
-  --color-text-main: #ffffff;
-  --color-text-muted: #a0a0a0;
-  --color-text-dim: #777777;
+  --color-blue: #1a1ab3;          /* primary royal blue from the logo */
+  --color-blue-light: #3333d1;    /* lighter blue for hovers/highlights */
+  --color-blue-dark: #0f0f7a;     /* deeper blue for pressed/active states */
+  --color-blue-soft: #e8e8ff;     /* very light blue tint for backgrounds/badges */
+
+  /* === Accent — the black square motif in the logo === */
+  --color-accent: #0d0d0d;
+  --color-accent-soft: #1a1a1a;
+
+  /* === Surfaces === */
+  --color-bg: #ffffff;             /* clean white — matches logo canvas */
+  --color-surface-1: #f7f7fb;      /* subtle off-white for cards */
+  --color-surface-2: #eeeef6;      /* slightly deeper for layering */
+  --color-surface-3: #e2e2ee;      /* borders, dividers, inactive */
+
+  /* === Text === */
+  --color-text-main: #0d0d1a;      /* near-black with a hint of blue */
+  --color-text-muted: #55556b;     /* secondary text */
+  --color-text-dim: #8a8a9e;       /* placeholders, disabled */
+
+  /* === Utility === */
+  --color-success: #1f9d55;
+  --color-warning: #d4a017;
+  --color-danger: #c0392b;
+  --color-border: #dcdce8;
+  --color-focus-ring: rgba(26, 26, 179, 0.35);
 
   --font-heading:
     "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -69,13 +85,23 @@ a {
   width: 100%;
 }
 
-.navbar,
-.footer {
+.navbar{
   padding: 16px 24px;
-  background: rgba(5, 5, 5, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+  border: 20px solid var();
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.footer {
+  padding: 16px 24px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -97,7 +123,7 @@ a {
 }
 
 .footer-logo {
-  height: 70px;
+  height: 100px;
   width: auto;
 }
 
@@ -105,6 +131,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: var(--color-text-main);
 }
 
 .footer-policy{
@@ -123,7 +150,6 @@ a {
 .navbar-logo {
   height: 50px;
   width: auto;
-  /* border-radius: 12px; */
 }
 
 .navbar-brand-text {

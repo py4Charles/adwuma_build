@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/icon.png";
 import "../styles/login.css";
+import { authApi } from "../lib/supabase.js";
 
 const SignupPage = () => {
     const navigate = useNavigate();
