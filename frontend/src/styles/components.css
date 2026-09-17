@@ -76,7 +76,7 @@
   flex: 1;
   padding: 12px 20px;
   border-radius: 999px;
-  background: var(--color-gold);
+  background: var(--color-brand);
   color: var(--color-bg);
   text-align: center;
   font-weight: 600;
@@ -91,7 +91,7 @@
 }
 
 .btn-primary:hover {
-  background: var(--color-gold-light);
+  background: var(--color-blue-light);
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(212, 175, 55, 0.2);
 }

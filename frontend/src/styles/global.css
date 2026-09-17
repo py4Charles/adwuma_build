@@ -1,8 +1,8 @@
 :root {
-  --color-brand: #1a1ab3;          /* primary royal blue from the logo */
-  --color-brand-light: #3333d1;    /* lighter blue for hovers/highlights */
-  --color-brand-dark: #0f0f7a;     /* deeper blue for pressed/active states */
-  --color-brand-soft: #e8e8ff;     /* very light blue tint for backgrounds/badges */
+  --color-blue: #1a1ab3;          /* primary royal blue from the logo */
+  --color-blue-light: #3333d1;    /* lighter blue for hovers/highlights */
+  --color-blue-dark: #0f0f7a;     /* deeper blue for pressed/active states */
+  --color-blue-soft: #e8e8ff;     /* very light blue tint for backgrounds/badges */
 
   /* === Accent — the black square motif in the logo === */
   --color-accent: #0d0d0d;
@@ -85,13 +85,23 @@ a {
   width: 100%;
 }
 
-.navbar,
-.footer {
+.navbar{
   padding: 16px 24px;
-  background: rgba(5, 5, 5, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+  border: 20px solid var();
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.footer {
+  padding: 16px 24px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -113,7 +123,7 @@ a {
 }
 
 .footer-logo {
-  height: 70px;
+  height: 100px;
   width: auto;
 }
 
@@ -121,6 +131,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: var(--color-text-main);
 }
 
 .footer-policy{
@@ -139,7 +150,6 @@ a {
 .navbar-logo {
   height: 50px;
   width: auto;
-  /* border-radius: 12px; */
 }
 
 .navbar-brand-text {
