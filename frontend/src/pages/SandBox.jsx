@@ -9,11 +9,12 @@ import SignupPage from "./SignupPage";
 
 const SandBox = () => {
     return (
-        <div style={{ padding: "40px", display: "grid", gap: "20px" }}>
-            <h2>Component Playground</h2>
+        <div style={{ display: "grid", gap: "20px" }}>
+            <h2 style={{padding: '20px 10px', display: 'flex', justifyContent: 'middle'}}>Component Playground</h2>
 
 
-            
+            {/* <LiveTrackingPage/> */}
+            <OtpVerificationPage/>
 
         </div>
     );
