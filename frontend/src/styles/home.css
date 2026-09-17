@@ -28,7 +28,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position:center 40%;
+  object-position: center 40%;
   filter: brightness(0.85) contrast(1.1);
   transition: transform 10s ease-out;
 }
@@ -124,7 +124,7 @@
   padding: 10px 24px;
   background: rgba(232, 232, 255, 0.05);
   backdrop-filter: blur(12px);
-  border: 1px solid rgb(51, 51, 209, 0.);
+  border: 1px solid rgb(51, 51, 209, 0);
   border-radius: 999px;
   margin-bottom: 32px;
   overflow: hidden;
@@ -215,7 +215,7 @@
 
 .btn-premium.primary {
   background: var(--color-blue-soft);
-  color:var(--color-blue);
+  color: var(--color-blue);
 }
 
 .btn-premium.primary:hover {
@@ -289,9 +289,18 @@
   border-radius: 50%;
 }
 
-.homepage-logo{
+.homepage-logo {
   height: 770px;
   width: auto;
+}
+
+.adwuma-text {
+  font-size: 50rem;
+  transition: transform 10s ease-in;
+}
+
+.adwuma-text:hover {
+  transform: scale(0.15);
 }
 
 @media (max-width: 968px) {
@@ -363,13 +372,18 @@
 }
 
 .stat-item:not(:last-child)::after {
-  content: '';
+  content: "";
   position: absolute;
   right: 0;
   top: 15%;
   height: 70%;
   width: 1px;
-  background: linear-gradient(180deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(212, 175, 55, 0.3),
+    transparent
+  );
 }
 
 .stat-number {
@@ -398,7 +412,7 @@
     margin: -20px 20px 40px;
     padding: 40px 20px;
   }
-  
+
   .stat-item:not(:last-child)::after {
     display: none;
   }
@@ -407,7 +421,11 @@
 /* Testimonials Section */
 .testimonials-section {
   padding: 100px 20px;
-  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface-1) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--color-bg) 0%,
+    var(--color-surface-1) 100%
+  );
   margin-bottom: 10px;
   border-radius: 0 12px 12px;
 }
@@ -428,7 +446,7 @@
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .testimonial-card:hover {
@@ -457,7 +475,7 @@
   font-family: serif;
 }
 
-.testimonial-card img{
+.testimonial-card img {
   margin-bottom: 10px;
   border: 2px solid var(--color-gold);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);

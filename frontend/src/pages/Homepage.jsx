@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import HeroSection from "../components/HeroSection.jsx";
-import ServiceCard from "../components/ServiceCard.jsx";
+// import ServiceCard from "../components/ServiceCard.jsx";
 import Counter from "../components/common/Counter.jsx";
 
 import logo from "../assets/icon.png"
@@ -26,18 +26,19 @@ const Homepage = () => {
 
                 <section style={{ padding: "80px 20px", textAlign: "center" }}>
 
-                    <h2 style={{ fontSize: "3rem", marginBottom: "12px", color: "var(--color-text-main)" }}>
+                    <div clasName="adwuma-text" style={{ fontSize: "3rem", margin: "10rem auto 0rem auto", color: "var(--color-text-main)" }}>
+                        <h2>
+                            A little <span style={{ color: "var(--color-blue-light)" }}>history</span> about  <span style={{ color: "var(--color-blue-light)" }}>Adwuma.</span>
+                        </h2>
+                    </div>
+                    {/* <h2 clasName="adwuma-text" style={{ fontSize: "3rem", margin: "10rem auto 20rem auto", color: "var(--color-text-main)" }}>
                         Adwuma <span style={{ color: "var(--color-blue-light)" }}>works</span> when we come <span style={{ color: "var(--color-blue-light)" }}>Together.</span>
-                    </h2>
-
-                    <p style={{ color: "var(--color-text-muted)", marginBottom: "50px" }}>
-                        Getting the <span style={{ color: "var(--color-blue-light)" }}>right</span> person for the <span style={{ color: "var(--color-blue-light)" }}>right</span> job becomes simple and fast.
-                    </p>
+                    </h2> */}
 
                     <div style={{
                         display: "grid",
                         gridTemplateColumns: "repeat(auto-fit, minmax(min(250px, 100%), 1fr))",
-                        gap: "2.5rem",                
+                        gap: "3.5rem",                
                         maxWidth: "1200px",
                         margin: "0px 0px 50px 0px",
                     }}>
@@ -67,11 +68,11 @@ const Homepage = () => {
                     </div>
 
                     <h2 style={{ fontSize: "3rem", marginBottom: "12px", color: "var(--color-text-main)" }}>
-                        How It <span style={{ color: "var(--color-gold)" }}>works</span>
+                        How It <span style={{ color: "var(--color-blue)" }}>works</span>
                     </h2>
 
                     <p style={{ color: "var(--color-text-muted)", marginTop: "-10px" }}>
-                        Getting the <span style={{ color: "var(--color-gold)" }}>right</span> person for the <span style={{ color: "var(--color-gold)" }}>right</span> job becomes simple and fast.
+                        Getting the <span style={{ color: "var(--color-blue)" }}>right</span> person for the <span style={{ color: "var(--color-blue)" }}>right</span> job becomes simple and fast.
                     </p>
 
                     <div style={{
@@ -121,7 +122,7 @@ const Homepage = () => {
                     <section id="features" className="text-section" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: '40px 0', marginBottom: '60px' }}>
                         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
                             <h2 style={{ fontSize: '2.5rem', color: 'var(--color-text-main)', marginBottom: '12px' }}>
-                                Why Choose <span style={{ color: 'var(--color-gold)' }}>CraftLink?</span>
+                                Why Choose <span style={{ color: 'var(--color-blue)' }}>Adwuma?</span>
                             </h2>
                             <p style={{ color: 'var(--color-text-muted)', fontSize: '1.15rem', maxWidth: '600px', margin: '0 auto' }}>
                                 We provide the most reliable and seamless marketplace for connecting with top-rated local professionals instanly.

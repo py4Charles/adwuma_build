@@ -36,8 +36,8 @@
 }
 
 .text-section h2 {
-  font-size: 1.8rem;
-  color: var(--color-gold);
+  font-size: 2rem;
+  color: var(--color-blue);
   margin-bottom: 16px;
   font-weight: 600;
 }
