@@ -31,20 +31,20 @@ const Homepage = () => {
                     </h2>
 
                     <p style={{ color: "var(--color-text-muted)", marginBottom: "50px" }}>
-                        Getting the <span style={{ color: "var(--color-gold)" }}>right</span> person for the <span style={{ color: "var(--color-gold)" }}>right</span> job becomes simple and fast.
+                        Getting the <span style={{ color: "var(--color-blue-light)" }}>right</span> person for the <span style={{ color: "var(--color-blue-light)" }}>right</span> job becomes simple and fast.
                     </p>
 
                     <div style={{
                         display: "grid",
-                        gridTemplateColumns: "auto-fit, minmax(350px, 500px)",
+                        gridTemplateColumns: "(350px, 500px)",
                         maxWidth: "1000px",
-                        margin: "0 auto 50px auto",
+                        // margin: "0 auto 50px auto",
                         verticalAlign: ""
                     }}>
 
                         <img src={logo} alt="Adwuma logo" />
 
-                        <p style={{ color: "var(--color-text-dim)", marginLeft: "-100px" }}>
+                        <p style={{ color: "var(--color-text-dim)", marginLeft: "20px" }}>
                             <span style={{ fontSize: "50px", }}>A</span>dwuma is an initiative by the Motion group of companies. Mainly made
                             to link customers with very well-known and approved workmen that know
                             what their about Adwuma is an initiative by the Motion group of companies.
