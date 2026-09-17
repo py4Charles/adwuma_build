@@ -27,7 +27,7 @@ const Homepage = () => {
                 <section style={{ padding: "80px 20px", textAlign: "center" }}>
 
                     <h2 style={{ fontSize: "3rem", marginBottom: "12px", color: "var(--color-text-main)" }}>
-                        Adwuma <span style={{ color: "var(--color-gold)" }}>works</span> when we come <span style={{ color: "var(--color-gold)" }}>Together.</span>
+                        Adwuma <span style={{ color: "var(--color-blue-light)" }}>works</span> when we come <span style={{ color: "var(--color-blue-light)" }}>Together.</span>
                     </h2>
 
                     <p style={{ color: "var(--color-text-muted)", marginBottom: "50px" }}>
@@ -36,7 +36,7 @@ const Homepage = () => {
 
                     <div style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(350px, 500px))",
+                        gridTemplateColumns: "auto-fit, minmax(350px, 500px)",
                         maxWidth: "1000px",
                         margin: "0 auto 50px auto",
                         verticalAlign: ""
