@@ -37,7 +37,7 @@ const Homepage = () => {
 
                     <div style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(250px, 500px))",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(350px, 500px))",
                         maxWidth: "1000px",
                         margin: "0 auto 50px auto",
                         verticalAlign: ""

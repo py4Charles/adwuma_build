@@ -3,6 +3,8 @@ import RatingStars from "../components/RatingStars";
 import ServiceCard from "../components/ServiceCard";
 import ArtisanDashboard from "./ArtisanDashboard";
 import AccountSettingsPage from "./AccountSettingsPage";
+import LiveTrackingPage from "./LiveTrackingPage.jsx";
+import OtpVerificationPage from "./OtpVerificationPage.jsx";
 import SignupPage from "./SignupPage";
 
 const SandBox = () => {
@@ -11,7 +13,7 @@ const SandBox = () => {
             <h2>Component Playground</h2>
 
 
-            <AccountSettingsPage />
+            
 
         </div>
     );
