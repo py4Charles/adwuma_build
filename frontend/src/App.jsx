@@ -19,6 +19,9 @@ import ChatPage from "./pages/ChatPage.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 import FlexMatchPage from "./pages/FlexMatchPage.jsx";
 import FlexRequestFormPage from "./pages/FlexRequestFormPage.jsx";
+import ReviewPage from "./pages/ReviewPage.jsx";
+import ServiceRequestPage from "./pages/ServiceRequestPage.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { ToastProvider } from "./context/ToastContext.jsx";
@@ -46,7 +49,10 @@ const App = () => {
                         <Route path="/chat/:chatId" element={<ChatPage />} />
                         <Route path="/contact" element={<ContactPage />} />
                         <Route path="/flex-match" element={<FlexMatchPage />} />
-                        <Route path="flex-request" element={<FlexRequestFormPage/>} />
+                        <Route path="flex-request" element={<FlexRequestFormPage />} />
+                        <Route path="/review/:artisanId" element={<ReviewPage />} />
+                        <Route path="/service-request" element={<ServiceRequestPage />} />
+                        <Route path="*" element={<Navigate to="/" replace/>} />
 
                         {import.meta.env.DEV && (
                             <Route path="/sandbox" element={<SandBox />} />

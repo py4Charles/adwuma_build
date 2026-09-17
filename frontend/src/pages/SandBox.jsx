@@ -6,6 +6,7 @@ import AccountSettingsPage from "./AccountSettingsPage";
 import LiveTrackingPage from "./LiveTrackingPage.jsx";
 import OtpVerificationPage from "./OtpVerificationPage.jsx";
 import SignupPage from "./SignupPage";
+import NotFound from "./NotFound.jsx";
 
 const SandBox = () => {
     return (
@@ -14,7 +15,8 @@ const SandBox = () => {
 
 
             {/* <LiveTrackingPage/> */}
-            <OtpVerificationPage/>
+            <NotFound/>
+            {/* <OtpVerificationPage/> */}
 
         </div>
     );
