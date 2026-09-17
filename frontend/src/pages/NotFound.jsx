@@ -11,10 +11,10 @@ const NotFound = () => {
             <main className="notfound-container">
                 <div className="notfound-content">
                     <h1 className="notfound-code"> 404 </h1>
-                    <h3 className="notfound-code"> Page not Found </h3>
+                    <h3 className="notfound-title"> Page not Found </h3>
                     <p className="notfound-message">
-                        Sorry, we couldn't find the page you're searching for <br />
-                        It may have been moved, deleted or never existed.
+                        Sorry, we couldn't find the page you're searching for... <br />
+                        It may have been moved, deleted or never existed
                     </p>
 
                     <div className="notfound-actions">
