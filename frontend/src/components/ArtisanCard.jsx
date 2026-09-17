@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import RatingStars from "./RatingStars.jsx";
-import "../styles/component.css"
+import "../styles/components.css"
 
 const ArtisanCard = ({ id, name, category, location, rating, image, price, distance }) => {
   return (

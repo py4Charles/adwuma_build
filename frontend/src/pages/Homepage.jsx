@@ -5,7 +5,15 @@ import Footer from "../components/Footer.jsx";
 import HeroSection from "../components/HeroSection.jsx";
 import ServiceCard from "../components/ServiceCard.jsx";
 import Counter from "../components/common/Counter.jsx";
+
 import logo from "../assets/icon.png"
+import profile01 from "../assets/profile-pics/profile-01.png";
+import profile02 from "../assets/profile-pics/profile-02.png";
+import profile03 from "../assets/profile-pics/profile-03.png";
+import profile04 from "../assets/profile-pics/profile-04.png";
+import profile05 from "../assets/profile-pics/profile-05.png";
+import profile06 from "../assets/profile-pics/profile-06.png";
+
 import "../styles/utils.css"
 import "../styles/categories.css"
 
@@ -29,7 +37,7 @@ const Homepage = () => {
 
                     <div style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(250px, 500px))",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(350px, 500px))",
                         maxWidth: "1000px",
                         margin: "0 auto 50px auto",
                         verticalAlign: ""
@@ -164,6 +172,104 @@ const Homepage = () => {
                         </div>
                     </section>
                 </div>
+
+                {/* TESTIMONIALS SECTION (ADDED 6 REVIEWS) */}
+                <section className="testimonials-section">
+                    <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+                        <h2 style={{ fontSize: '2.5rem', color: 'var(--color-text-main)', marginBottom: '12px' }}>
+                            Why Trust <span style={{ color: 'var(--color-gold)' }}>Us</span>
+                        </h2>
+                        <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem' }}>
+                            Real stories from real customers and professionals on Adwuma.
+                        </p>
+                    </div>
+
+                    <div className="testimonials-grid">
+                        <div className="testimonial-card">
+                            <img src={profile01} alt="profile-pic-Adobea" style={{borderRadius: "10px"}}/>
+                            <div className="testimonial-rating">★★★★</div>
+                            <p className="testimonial-content">
+                                The best way to find a plumber in Accra. Fast and reliable service every time.
+                            </p>
+                            <div className="testimonial-author">
+                                <div className="author-info">
+                                    <h4>Adobea M.</h4>
+                                    <p>East Legon, ACC</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="testimonial-card">
+                            <img src={profile02} alt="profile-pic-Kofi" style={{borderRadius: "10px"}}/>
+                            <div className="testimonial-rating">★★★★★</div>
+                            <p className="testimonial-content">
+                                Found an amazing electrician within minutes. CraftLink is a lifesaver for home emergencies!
+                            </p>
+                            <div className="testimonial-author">
+                                <div className="author-info">
+                                    <h4>Kofi B.</h4>
+                                    <p>Kumasi, ASH</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="testimonial-card">
+                            <img src={profile03} alt="profile-pic-Sarah" style={{borderRadius: "10px"}}/>
+                            <div className="testimonial-rating">★★★★★</div>
+                            <p className="testimonial-content">
+                                Quality artisans are hard to find, but CraftLink makes it easy. I'll never go back to random calls.
+                            </p>
+                            <div className="testimonial-author">
+                                <div className="author-info">
+                                    <h4>Sarah E.</h4>
+                                    <p>Osu, ACC</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="testimonial-card">
+                            <img src={profile04} alt="profile-pic-John" style={{borderRadius: "10px"}}/>
+                            <div className="testimonial-rating">★★★★★</div>
+                            <p className="testimonial-content">
+                                I used the Flex service for a quick cleaning job and it was perfect. The matching was spot on.
+                            </p>
+                            <div className="testimonial-author">
+                                <div className="author-info">
+                                    <h4>John D.</h4>
+                                    <p>Cantonments, ACC</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="testimonial-card">
+                            <img src={profile05} alt="profile-pic-Ama" style={{borderRadius: "10px"}}/>
+                            <div className="testimonial-rating">★★★★★</div>
+                            <p className="testimonial-content">
+                                Transparent pricing and verified reviews gave me peace of mind when hiring for my office setup.
+                            </p>
+                            <div className="testimonial-author">
+                                <div className="author-info">
+                                    <h4>Ama K.</h4>
+                                    <p>Tema, GHA</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="testimonial-card">
+                            <img src={profile06} alt="profile-pic-Emmanuel" style={{borderRadius: "10px"}}/>
+                            <div className="testimonial-rating">★★★★★</div>
+                            <p className="testimonial-content">
+                                A game changer for local professionals. I've grown my business significantly since joining.
+                            </p>
+                            <div className="testimonial-author">
+                                <div className="author-info">
+                                    <h4>Emmanuel T.</h4>
+                                    <p>Professional Painter</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </main>
 
             <Footer />
