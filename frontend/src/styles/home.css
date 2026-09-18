@@ -426,8 +426,8 @@
     var(--color-bg) 0%,
     var(--color-surface-1) 100%
   );
-  margin-bottom: 10px;
-  border-radius: 0 12px 12px;
+  margin-bottom: 3rem;
+  border-radius: 0 20px 20px;
 }
 
 .testimonials-grid {
