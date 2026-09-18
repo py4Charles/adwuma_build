@@ -1,23 +1,23 @@
 :root {
-  --color-blue: #1a1ab3;          /* primary royal blue from the logo */
-  --color-blue-light: #3333d1;    /* lighter blue for hovers/highlights */
-  --color-blue-dark: #0f0f7a;     /* deeper blue for pressed/active states */
-  --color-blue-soft: #e8e8ff;     /* very light blue tint for backgrounds/badges */
+  --color-blue: #1a1ab3; /* primary royal blue from the logo */
+  --color-blue-light: #3333d1; /* lighter blue for hovers/highlights */
+  --color-blue-dark: #0f0f7a; /* deeper blue for pressed/active states */
+  --color-blue-soft: #e8e8ff; /* very light blue tint for backgrounds/badges */
 
   /* === Accent — the black square motif in the logo === */
   --color-accent: #0d0d0d;
   --color-accent-soft: #1a1a1a;
 
   /* === Surfaces === */
-  --color-bg: #ffffff;             /* clean white — matches logo canvas */
-  --color-surface-1: #f7f7fb;      /* subtle off-white for cards */
-  --color-surface-2: #eeeef6;      /* slightly deeper for layering */
-  --color-surface-3: #e2e2ee;      /* borders, dividers, inactive */
+  --color-bg: #ffffff; /* clean white — matches logo canvas */
+  --color-surface-1: #f7f7fb; /* subtle off-white for cards */
+  --color-surface-2: #eeeef6; /* slightly deeper for layering */
+  --color-surface-3: #e2e2ee; /* borders, dividers, inactive */
 
   /* === Text === */
-  --color-text-main: #0d0d1a;      /* near-black with a hint of blue */
-  --color-text-muted: #55556b;     /* secondary text */
-  --color-text-dim: #8a8a9e;       /* placeholders, disabled */
+  --color-text-main: #0d0d1a; /* near-black with a hint of blue */
+  --color-text-muted: #55556b; /* secondary text */
+  --color-text-dim: #8a8a9e; /* placeholders, disabled */
 
   /* === Utility === */
   --color-success: #1f9d55;
@@ -85,7 +85,6 @@ a {
   width: 100%;
 }
 
-
 .footer {
   padding: 16px 24px;
   backdrop-filter: blur(10px);
@@ -122,17 +121,14 @@ a {
   color: var(--color-text-main);
 }
 
-.footer-policy{
+.footer-policy {
   display: flex;
   align-items: center;
   gap: 50px;
 }
 
-.navbar{
+.navbar {
   padding: 10px 24px;
-  /* backdrop-filter: blur(10px); */
-  /* -webkit-backdrop-filter: blur(10px); */
-  /* border: 2px solid var(--color-surface-1); */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,11 +137,14 @@ a {
   z-index: 100;
 }
 
-.navbar-inner{
-  padding: 10px 24px;
+.navbar-inner {
+  padding: 12px 24px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 2px solid rgb(247, 247, 251);
+  background: rgb(238, 238, 246, 0.2);
+  box-shadow: 0px 2px 40px rgb(0 0 0 / 0.6);
+  border: 1px solid rgb(250, 250, 250);
+  border-radius: 999px;
   display: flex;
   gap: 20rem;
   align-items: center;
@@ -167,13 +166,13 @@ a {
   width: auto;
 }
 
-.navbar-brand-text {
+/* .navbar-brand-text {
   font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1.4rem;
   color: var(--color-blue-dark);
   letter-spacing: -0.5px;
-}
+} */
 
 .navbar-links {
   display: flex;
@@ -184,6 +183,11 @@ a {
   justify-content: center;
 }
 
+.navbar-links .nav-btn {
+  font-weight: 500;
+  color: var(--color-text-main);
+}
+
 .navbar-auth {
   display: flex;
   justify-content: flex-end;
@@ -192,27 +196,31 @@ a {
 }
 
 .navbar-auth .login-btn {
-  color: var(--color-text-main);
+  border: 1px solid var(--color-blue);
+  color: var(--color-blue);
+  min-width: fit-content;
+  border-radius: 999px;
   padding: 8px 16px;
   font-weight: 500;
   transition: color 0.3s;
 }
 
 .navbar-auth .login-btn:hover {
-  color: var(--color-gold);
+  color: var(--color-blue);
 }
 
 .navbar-auth .signup-btn {
-  background: var(--color-gold);
+  background: var(--color-blue);
   color: var(--color-bg);
   padding: 8px 20px;
+  min-width: fit-content;
   border-radius: 999px;
   font-weight: 600;
   transition: all 0.3s;
 }
 
 .navbar-auth .signup-btn:hover {
-  background: var(--color-gold-light);
+  background: var(--color-blue-light);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
 }
