@@ -193,21 +193,21 @@ const Homepage = () => {
                             </p>
                             <div className="testimonial-author">
                                 <div className="author-info">
-                                    <h4>Adobea M.</h4>
+                                    <h4>Adobea Mensah</h4>
                                     <p>East Legon, ACC</p>
                                 </div>
                             </div>
                         </div>
 
                         <div className="testimonial-card">
-                            <img src={profile02} alt="profile-pic-Kofi" style={{ borderRadius: "10px" }} />
+                            <img src={profile02} alt="profile-pic-Kofi" />
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 Found an amazing electrician within minutes. CraftLink is a lifesaver for home emergencies!
                             </p>
                             <div className="testimonial-author">
                                 <div className="author-info">
-                                    <h4>Kofi B.</h4>
+                                    <h4>Kofi Bentum</h4>
                                     <p>Kumasi, ASH</p>
                                 </div>
                             </div>
@@ -221,7 +221,7 @@ const Homepage = () => {
                             </p>
                             <div className="testimonial-author">
                                 <div className="author-info">
-                                    <h4>Sarah E.</h4>
+                                    <h4>Sarah Eghansah</h4>
                                     <p>Osu, ACC</p>
                                 </div>
                             </div>
@@ -235,7 +235,7 @@ const Homepage = () => {
                             </p>
                             <div className="testimonial-author">
                                 <div className="author-info">
-                                    <h4>John D.</h4>
+                                    <h4>John Darko</h4>
                                     <p>Cantonments, ACC</p>
                                 </div>
                             </div>
@@ -249,7 +249,7 @@ const Homepage = () => {
                             </p>
                             <div className="testimonial-author">
                                 <div className="author-info">
-                                    <h4>Ama K.</h4>
+                                    <h4>Ama Koranteng</h4>
                                     <p>Tema, GHA</p>
                                 </div>
                             </div>
@@ -263,7 +263,7 @@ const Homepage = () => {
                             </p>
                             <div className="testimonial-author">
                                 <div className="author-info">
-                                    <h4>Emmanuel T.</h4>
+                                    <h4>Emmanuel Tamakloe</h4>
                                     <p>Professional Painter</p>
                                 </div>
                             </div>
