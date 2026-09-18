@@ -177,10 +177,10 @@ const Homepage = () => {
                 <section className="testimonials-section">
                     <div style={{ textAlign: 'center', marginBottom: '60px' }}>
                         <h2 style={{ fontSize: '2.5rem', color: 'var(--color-text-main)', marginBottom: '12px' }}>
-                            Why Trust <span style={{ color: 'var(--color-gold)' }}>Us</span>
+                            Why Trust <span style={{ color: 'var(--color-blue)' }}>Us</span>
                         </h2>
                         <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem' }}>
-                            Real stories from real customers and professionals on Adwuma.
+                            Real stories from real customers and professionals on <span style={{color: 'var(--color-blue)'}}>Adwuma</span>.
                         </p>
                     </div>
 
