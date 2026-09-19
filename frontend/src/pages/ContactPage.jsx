@@ -6,7 +6,7 @@ const ContactPage = () => {
     return (
         <div className="page">
             <Navbar />
-            <main className="page-content" style={{ maxWidth: '800px', paddingBottom: '80px' }}>
+            <main className="page-content" style={{ maxWidth: '1000px', paddingBottom: '80px' }}>
                 <div className="text-header">
                     <h1>Contact <span>Us</span></h1>
                     <p>We're here to help you connecting with the best professionals.</p>

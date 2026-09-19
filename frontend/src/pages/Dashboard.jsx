@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/dashboard.css";
 import MyRequestsPage from "./MyRequestsPage";
 import WalletPage from "./WalletPage.jsx";
-import { useAuth } from "../context/AuthContext.jsx";
-import { authApi, requestsApi, walletApi, notificationsApi } from "../lib/supabase.js";
 import ComplaintsPage from "./ComplaintsPage.jsx";
 import AccountSettingsPage from "./AccountSettingsPage.jsx";
+
 import logo from "../assets/icon.png";
+import "../styles/dashboard.css";
+import { authApi, requestsApi, walletApi, notificationsApi } from "../lib/supabase.js";
+import { useAuth } from "../context/AuthContext.jsx";
 
 // Artisan category portraits (one per sub-category); fallback for missing
 const artisanImages = Object.fromEntries(
