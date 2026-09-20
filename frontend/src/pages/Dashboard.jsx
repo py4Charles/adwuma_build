@@ -608,7 +608,7 @@ const Dashboard = () => {
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
                                     <button
                                         onClick={() => setSelectedPremiumCategory(null)}
-                                        style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--color-border)', color: 'var(--color-gold)', padding: '8px 15px', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold' }}
+                                        style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--color-border)', color: 'var(--color-text-main)', padding: '8px 15px', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold' }}
                                     >
                                         ← Back
                                     </button>
@@ -626,10 +626,10 @@ const Dashboard = () => {
                                             <div className="icon-box" style={{ fontSize: '1.8rem' }}>{sub.icon}</div>
                                             <h3 style={{ fontSize: '1rem', marginTop: '1rem' }}>{sub.name}</h3>
                                             <button style={{
-                                                marginTop: '1rem',
-                                                background: 'transparent',
-                                                border: '1px solid var(--color-gold)',
-                                                color: 'var(--color-gold)',
+                                                marginTop: '0.5rem',
+                                                background: 'var(--color-surface-1)',
+                                                border: '1px solid var(--color-blue)',
+                                                color: 'var(--color-text-main)',
                                                 padding: '6px 12px',
                                                 borderRadius: '8px',
                                                 fontSize: '0.8rem',
