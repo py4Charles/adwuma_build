@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/icon.png"
 import "../styles/login.css"
+import { authApi } from "../lib/supabase.js";
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -106,7 +107,7 @@ const LoginPage = () => {
                         Don&apos;t have an account?{" "}
                         <span
                             onClick={() => navigate("/signup")}
-                            style={{ color: "var(--color-gold)", cursor: "pointer", fontWeight: "600"}}
+                            style={{ color: "var(--color-blue)", cursor: "pointer", fontWeight: "600"}}
                         >
                             Sign Up
                         </span>

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/icon.png";
 import "../styles/login.css";
+import { authApi } from "../lib/supabase.js";
 
 const SignupPage = () => {
     const navigate = useNavigate();
@@ -56,7 +57,7 @@ const SignupPage = () => {
             <div className="cl-login-card">
                 <div className="cl-login-header">
                     <div className="cl-login-logo-wrapper">
-                        <img src={logo} alt="CraftLink Logo" className="cl-login-header-logo" />
+                        <img src={logo} alt="Adwuma Logo" className="cl-login-header-logo" />
                         <div className="cl-login-logo">Adwuma</div>
                     </div>
                     <h1 className="cl-login-title">Create Account</h1>
@@ -152,7 +153,7 @@ const SignupPage = () => {
                         Already have an account?{" "}
                         <span
                             onClick={() => navigate("/login")}
-                            style={{ color: "var(--color-gold)", cursor: "pointer", fontWeight: "600" }}
+                            style={{ color: "var(--color-blue)", cursor: "pointer", fontWeight: "600" }}
                         >
                             Log In
                         </span>

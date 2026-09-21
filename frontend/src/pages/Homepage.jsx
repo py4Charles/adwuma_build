@@ -1,9 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import HeroSection from "../components/HeroSection.jsx";
-import ServiceCard from "../components/ServiceCard.jsx";
+// import ServiceCard from "../components/ServiceCard.jsx";
 import Counter from "../components/common/Counter.jsx";
 
 import logo from "../assets/icon.png"
@@ -27,25 +26,26 @@ const Homepage = () => {
 
                 <section style={{ padding: "80px 20px", textAlign: "center" }}>
 
-                    <h2 style={{ fontSize: "3rem", marginBottom: "12px", color: "var(--color-text-main)" }}>
-                        Adwuma <span style={{ color: "var(--color-gold)" }}>works</span> when we come <span style={{ color: "var(--color-gold)" }}>Together.</span>
-                    </h2>
-
-                    <p style={{ color: "var(--color-text-muted)", marginBottom: "50px" }}>
-                        Getting the <span style={{ color: "var(--color-gold)" }}>right</span> person for the <span style={{ color: "var(--color-gold)" }}>right</span> job becomes simple and fast.
-                    </p>
+                    <div clasName="adwuma-text" style={{ fontSize: "3rem", margin: "10rem auto 0rem auto", color: "var(--color-text-main)" }}>
+                        <h2>
+                            A little <span style={{ color: "var(--color-blue-light)" }}>history</span> about  <span style={{ color: "var(--color-blue-light)" }}>Adwuma.</span>
+                        </h2>
+                    </div>
+                    {/* <h2 clasName="adwuma-text" style={{ fontSize: "3rem", margin: "10rem auto 20rem auto", color: "var(--color-text-main)" }}>
+                        Adwuma <span style={{ color: "var(--color-blue-light)" }}>works</span> when we come <span style={{ color: "var(--color-blue-light)" }}>Together.</span>
+                    </h2> */}
 
                     <div style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(auto-fit, minmax(350px, 500px))",
-                        maxWidth: "1000px",
-                        margin: "0 auto 50px auto",
-                        verticalAlign: ""
+                        gridTemplateColumns: "repeat(auto-fit, minmax(min(250px, 100%), 1fr))",
+                        gap: "3.5rem",                
+                        maxWidth: "1200px",
+                        margin: "0px 0px 50px 0px",
                     }}>
 
-                        <img src={logo} alt="Adwuma logo" />
+                        <img src={logo} alt="Adwuma logo" className="homepage-logo"/>
 
-                        <p style={{ color: "var(--color-text-dim)", marginLeft: "-100px" }}>
+                        <p style={{ color: "var(--color-text-dim)", marginLeft: "20px" }}>
                             <span style={{ fontSize: "50px", }}>A</span>dwuma is an initiative by the Motion group of companies. Mainly made
                             to link customers with very well-known and approved workmen that know
                             what their about Adwuma is an initiative by the Motion group of companies.
@@ -68,11 +68,11 @@ const Homepage = () => {
                     </div>
 
                     <h2 style={{ fontSize: "3rem", marginBottom: "12px", color: "var(--color-text-main)" }}>
-                        How It <span style={{ color: "var(--color-gold)" }}>works</span>
+                        How It <span style={{ color: "var(--color-blue)" }}>works</span>
                     </h2>
 
                     <p style={{ color: "var(--color-text-muted)", marginTop: "-10px" }}>
-                        Getting the <span style={{ color: "var(--color-gold)" }}>right</span> person for the <span style={{ color: "var(--color-gold)" }}>right</span> job becomes simple and fast.
+                        Getting the <span style={{ color: "var(--color-blue)" }}>right</span> person for the <span style={{ color: "var(--color-blue)" }}>right</span> job becomes simple and fast.
                     </p>
 
                     <div style={{
@@ -120,9 +120,9 @@ const Homepage = () => {
 
                     {/* Features Section */}
                     <section id="features" className="text-section" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: '40px 0', marginBottom: '60px' }}>
-                        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+                        <div style={{  fontSize: "3rem", color: "var(--color-text-main)", textAlign: 'center', marginBottom: '3rem' }}>
                             <h2 style={{ fontSize: '2.5rem', color: 'var(--color-text-main)', marginBottom: '12px' }}>
-                                Why Choose <span style={{ color: 'var(--color-gold)' }}>CraftLink?</span>
+                                Why Choose <span style={{ color: 'var(--color-blue)' }}>Adwuma?</span>
                             </h2>
                             <p style={{ color: 'var(--color-text-muted)', fontSize: '1.15rem', maxWidth: '600px', margin: '0 auto' }}>
                                 We provide the most reliable and seamless marketplace for connecting with top-rated local professionals instanly.
@@ -131,19 +131,19 @@ const Homepage = () => {
 
                         <div className="feature-grid">
                             <div className="feature-item" style={{ textAlign: 'center', padding: '32px 24px' }}>
-                                <span className="feature-icon" style={{ fontSize: '3rem', margin: '0 auto 20px', background: 'rgba(212, 175, 55, 0.1)', width: '80px', height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: 'var(--color-gold)' }}>🛡️</span>
+                                <span className="feature-icon" style={{ fontSize: '3rem', margin: '0 auto 20px', background: 'rgb(15, 15, 122, 0.1)', width: '80px', height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: 'var(--color-blue-dark)' }}>🛡️</span>
                                 <h3 style={{ fontSize: '1.3rem', marginBottom: '12px', color: 'var(--color-text-main)' }}>Vetted Professionals</h3>
                                 <p style={{ color: 'var(--color-text-dim)', lineHeight: '1.6' }}>Every artisan undergoes a strict review process to ensure top-tier quality and safety.</p>
                             </div>
 
                             <div className="feature-item" style={{ textAlign: 'center', padding: '32px 24px' }}>
-                                <span className="feature-icon" style={{ fontSize: '3rem', margin: '0 auto 20px', background: 'rgba(212, 175, 55, 0.1)', width: '80px', height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: 'var(--color-gold)' }}>⚡</span>
+                                <span className="feature-icon" style={{ fontSize: '3rem', margin: '0 auto 20px', background: 'rgb(15, 15, 122, 0.1)', width: '80px', height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: 'var(--color-blue-dark)' }}>⚡</span>
                                 <h3 style={{ fontSize: '1.3rem', marginBottom: '12px', color: 'var(--color-text-main)' }}>Instant Booking</h3>
                                 <p style={{ color: 'var(--color-text-dim)', lineHeight: '1.6' }}>Request exactly what you need in seconds with our CraftLink Flex engine.</p>
                             </div>
 
                             <div className="feature-item" style={{ textAlign: 'center', padding: '32px 24px' }}>
-                                <span className="feature-icon" style={{ fontSize: '3rem', margin: '0 auto 20px', background: 'rgba(212, 175, 55, 0.1)', width: '80px', height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: 'var(--color-gold)' }}>⭐</span>
+                                <span className="feature-icon" style={{ fontSize: '3rem', margin: '0 auto 20px', background: 'rgb(15, 15, 122, 0.1)', width: '80px', height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', color: 'var(--color-blue-dark)' }}>⭐</span>
                                 <h3 style={{ fontSize: '1.3rem', marginBottom: '12px', color: 'var(--color-text-main)' }}>Community Driven</h3>
                                 <p style={{ color: 'var(--color-text-dim)', lineHeight: '1.6' }}>Make decisions based on honest, verified reviews from real customers near you.</p>
                             </div>
@@ -177,93 +177,93 @@ const Homepage = () => {
                 <section className="testimonials-section">
                     <div style={{ textAlign: 'center', marginBottom: '60px' }}>
                         <h2 style={{ fontSize: '2.5rem', color: 'var(--color-text-main)', marginBottom: '12px' }}>
-                            Why Trust <span style={{ color: 'var(--color-gold)' }}>Us</span>
+                            Why Trust <span style={{ color: 'var(--color-blue)' }}>Us</span>
                         </h2>
                         <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem' }}>
-                            Real stories from real customers and professionals on Adwuma.
+                            Real stories from real customers and professionals on <span style={{color: 'var(--color-blue)'}}>Adwuma</span>.
                         </p>
                     </div>
 
                     <div className="testimonials-grid">
                         <div className="testimonial-card">
-                            <img src={profile01} alt="profile-pic-Adobea" style={{borderRadius: "10px"}}/>
+                            <img src={profile01} alt="profile-pic-Adobea" style={{ borderRadius: "10px" }} />
                             <div className="testimonial-rating">★★★★</div>
                             <p className="testimonial-content">
                                 The best way to find a plumber in Accra. Fast and reliable service every time.
                             </p>
                             <div className="testimonial-author">
                                 <div className="author-info">
-                                    <h4>Adobea M.</h4>
+                                    <h4>Adobea Mensah</h4>
                                     <p>East Legon, ACC</p>
                                 </div>
                             </div>
                         </div>
 
                         <div className="testimonial-card">
-                            <img src={profile02} alt="profile-pic-Kofi" style={{borderRadius: "10px"}}/>
+                            <img src={profile02} alt="profile-pic-Kofi" />
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 Found an amazing electrician within minutes. CraftLink is a lifesaver for home emergencies!
                             </p>
                             <div className="testimonial-author">
                                 <div className="author-info">
-                                    <h4>Kofi B.</h4>
+                                    <h4>Kofi Bentum</h4>
                                     <p>Kumasi, ASH</p>
                                 </div>
                             </div>
                         </div>
 
                         <div className="testimonial-card">
-                            <img src={profile03} alt="profile-pic-Sarah" style={{borderRadius: "10px"}}/>
+                            <img src={profile03} alt="profile-pic-Sarah" style={{ borderRadius: "10px" }} />
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 Quality artisans are hard to find, but CraftLink makes it easy. I'll never go back to random calls.
                             </p>
                             <div className="testimonial-author">
                                 <div className="author-info">
-                                    <h4>Sarah E.</h4>
+                                    <h4>Sarah Eghansah</h4>
                                     <p>Osu, ACC</p>
                                 </div>
                             </div>
                         </div>
 
                         <div className="testimonial-card">
-                            <img src={profile04} alt="profile-pic-John" style={{borderRadius: "10px"}}/>
+                            <img src={profile04} alt="profile-pic-John" style={{ borderRadius: "10px" }} />
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 I used the Flex service for a quick cleaning job and it was perfect. The matching was spot on.
                             </p>
                             <div className="testimonial-author">
                                 <div className="author-info">
-                                    <h4>John D.</h4>
+                                    <h4>John Darko</h4>
                                     <p>Cantonments, ACC</p>
                                 </div>
                             </div>
                         </div>
 
                         <div className="testimonial-card">
-                            <img src={profile05} alt="profile-pic-Ama" style={{borderRadius: "10px"}}/>
+                            <img src={profile05} alt="profile-pic-Ama" style={{ borderRadius: "10px" }} />
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 Transparent pricing and verified reviews gave me peace of mind when hiring for my office setup.
                             </p>
                             <div className="testimonial-author">
                                 <div className="author-info">
-                                    <h4>Ama K.</h4>
+                                    <h4>Ama Koranteng</h4>
                                     <p>Tema, GHA</p>
                                 </div>
                             </div>
                         </div>
 
                         <div className="testimonial-card">
-                            <img src={profile06} alt="profile-pic-Emmanuel" style={{borderRadius: "10px"}}/>
+                            <img src={profile06} alt="profile-pic-Emmanuel" style={{ borderRadius: "10px" }} />
                             <div className="testimonial-rating">★★★★★</div>
                             <p className="testimonial-content">
                                 A game changer for local professionals. I've grown my business significantly since joining.
                             </p>
                             <div className="testimonial-author">
                                 <div className="author-info">
-                                    <h4>Emmanuel T.</h4>
+                                    <h4>Emmanuel Tamakloe</h4>
                                     <p>Professional Painter</p>
                                 </div>
                             </div>

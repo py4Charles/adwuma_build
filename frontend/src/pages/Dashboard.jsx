@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/dashboard.css";
 import MyRequestsPage from "./MyRequestsPage";
 import WalletPage from "./WalletPage.jsx";
-import { useAuth } from "../context/AuthContext.jsx";
-import { authApi, requestsApi, walletApi, notificationsApi } from "../lib/supabase.js";
 import ComplaintsPage from "./ComplaintsPage.jsx";
 import AccountSettingsPage from "./AccountSettingsPage.jsx";
+
 import logo from "../assets/icon.png";
+import "../styles/dashboard.css";
+import { authApi, requestsApi, walletApi, notificationsApi } from "../lib/supabase.js";
+import { useAuth } from "../context/AuthContext.jsx";
 
 // Artisan category portraits (one per sub-category); fallback for missing
 const artisanImages = Object.fromEntries(
@@ -82,7 +83,7 @@ const Dashboard = () => {
     const [completedJobCount, setCompletedJobCount] = useState(0);
     const [notifications, setNotifications] = useState([]);
     const { user, profile } = useAuth();
-    const username = profile?.first_name || profile?.username || "There";
+    const username = profile?.first_name || profile?.username || "User";
 
     // Load live stats from Supabase
     useEffect(() => {
@@ -318,8 +319,8 @@ const Dashboard = () => {
             {/* SIDEBAR NAVIGATION (LEFT SIDE) */}
             <aside className="dashboard-sidebar">
                 <Link to="/" className="sidebar-logo" style={{ textDecoration: 'none' }}>
-                    <img src={logo} alt="Adwuma Logo" style={{ width: 'auto', height: '50px', objectFit: 'contain' }} />
-                    <span>Adwuma</span>
+                    <img src={logo} alt="Adwuma Logo" style={{ width: 'auto', height: '120px', objectFit: 'contain' }} />
+                    {/* <span>Adwuma</span> */}
                 </Link>
 
                 <nav className="sidebar-menu">
@@ -346,7 +347,7 @@ const Dashboard = () => {
                     ))}
 
                     {/* User Account Section at Bottom */}
-                    <div style={{ marginTop: 'auto', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '20px', position: 'relative' }}>
+                    <div style={{ marginTop: 'auto', borderTop: '1px solid var(--color-surface-3)', paddingTop: '20px', position: 'relative' }}>
                         <div
                             onClick={() => setProfileMenuOpen(!profileMenuOpen)}
                             style={{
@@ -356,7 +357,7 @@ const Dashboard = () => {
                                 padding: '12px',
                                 borderRadius: '16px',
                                 cursor: 'pointer',
-                                background: profileMenuOpen ? 'rgba(255,255,255,0.05)' : 'transparent',
+                                background: profileMenuOpen ? 'var(--color-text-muted)' : 'transparent',
                                 transition: 'all 0.3s ease'
                             }}
                         >
@@ -364,18 +365,18 @@ const Dashboard = () => {
                                 width: '40px',
                                 height: '40px',
                                 borderRadius: '50%',
-                                background: 'var(--color-gold)',
+                                background: 'var(--color-surface-3)',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                color: 'black',
+                                color: 'var(--color-text-main)',
                                 fontWeight: '800',
                                 fontSize: '1rem'
                             }}>
                                 {username.charAt(0)}
                             </div>
                             <div style={{ flex: 1 }}>
-                                <div style={{ color: 'white', fontWeight: 'bold', fontSize: '0.9rem' }}>{username}</div>
+                                <div style={{ color: 'var(--color-text-main)', fontWeight: 'bold', fontSize: '0.9rem' }}>{username}</div>
                                 <div style={{ color: 'var(--color-text-dim)', fontSize: '0.75rem' }}>Customer</div>
                             </div>
                             <div style={{ color: 'var(--color-text-dim)', transform: profileMenuOpen ? 'rotate(180deg)' : 'none', transition: 'all 0.3s ease' }}>
@@ -389,10 +390,10 @@ const Dashboard = () => {
                                 bottom: '80px',
                                 left: '0',
                                 width: '100%',
-                                background: '#1a1a1a',
+                                background: 'var(--color-surface-1)',
                                 border: '1px solid var(--color-border)',
                                 borderRadius: '16px',
-                                boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+                                boxShadow: '0 0px 10px rgba(0,0,0,0.2)',
                                 padding: '8px',
                                 zIndex: 1000,
                                 animation: 'fadeIn 0.2s ease-out'
@@ -607,7 +608,7 @@ const Dashboard = () => {
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
                                     <button
                                         onClick={() => setSelectedPremiumCategory(null)}
-                                        style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--color-border)', color: 'var(--color-gold)', padding: '8px 15px', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold' }}
+                                        style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--color-border)', color: 'var(--color-text-main)', padding: '8px 15px', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold' }}
                                     >
                                         ← Back
                                     </button>
@@ -625,10 +626,10 @@ const Dashboard = () => {
                                             <div className="icon-box" style={{ fontSize: '1.8rem' }}>{sub.icon}</div>
                                             <h3 style={{ fontSize: '1rem', marginTop: '1rem' }}>{sub.name}</h3>
                                             <button style={{
-                                                marginTop: '1rem',
-                                                background: 'transparent',
-                                                border: '1px solid var(--color-gold)',
-                                                color: 'var(--color-gold)',
+                                                marginTop: '0.5rem',
+                                                background: 'var(--color-surface-1)',
+                                                border: '1px solid var(--color-blue)',
+                                                color: 'var(--color-text-main)',
                                                 padding: '6px 12px',
                                                 borderRadius: '8px',
                                                 fontSize: '0.8rem',
