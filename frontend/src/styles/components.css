@@ -93,7 +93,7 @@
 .btn-primary:hover {
   background: var(--color-blue-light);
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(212, 175, 55, 0.2);
+  box-shadow: 0 8px 16px rgba(26, 26, 179, 0.2);
 }
 
 .btn-secondary {
@@ -124,7 +124,7 @@
   background: var(--color-surface-2);
   border-radius: 20px;
   padding: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(26, 26, 179, 0.2);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
 }
 
