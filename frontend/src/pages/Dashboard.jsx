@@ -83,7 +83,7 @@ const Dashboard = () => {
     const [completedJobCount, setCompletedJobCount] = useState(0);
     const [notifications, setNotifications] = useState([]);
     const { user, profile } = useAuth();
-    const username = profile?.first_name || profile?.username || "There";
+    const username = profile?.first_name || profile?.username || "User";
 
     // Load live stats from Supabase
     useEffect(() => {
