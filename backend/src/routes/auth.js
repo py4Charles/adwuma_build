@@ -1,6 +1,6 @@
-const { Router } = require('express');
-const { adminClient } = require('../lib/supabase');
-const { requireAuth } = require('../middleware/auth');
+import { Router } from 'express';
+import { adminClient } from '../lib/supabase.js';
+import { requireAuth } from '../middleware/auth.js';
 
 const router = Router();
 
@@ -50,4 +50,4 @@ router.get('/me', requireAuth, async (req, res) => {
   res.json({ user: req.user, profile });
 });
 
-module.exports = router;
+export default router;

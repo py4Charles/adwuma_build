@@ -1,4 +1,4 @@
-const { adminClient, clientForUser } = require('../lib/supabase');
+import { adminClient, clientForUser } from "../lib/supabase.js";
 
 async function requireAuth(req, res, next) {
   const header = req.headers.authorization || '';
@@ -20,4 +20,4 @@ async function requireAuth(req, res, next) {
   next();
 }
 
-module.exports = { requireAuth };
+export default requireAuth;
