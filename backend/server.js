@@ -21,5 +21,5 @@ app.use((err, _req, res, _next) => {
 });
 
 app.listen(port, () => {
-  console.log(`BFF listening on http://localhost:${port}`);
+  console.log(`Server listening on http://localhost:${port}`);
 });
