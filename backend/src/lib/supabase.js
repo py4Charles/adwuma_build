@@ -20,4 +20,4 @@ function clientForUser(accessToken) {
   });
 }
 
-module.exports = { adminClient, clientForUser };
+export default {adminClient, clientForUser};
