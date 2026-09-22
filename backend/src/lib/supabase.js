@@ -20,4 +20,4 @@ function clientForUser(accessToken) {
   });
 }
 
-export default {adminClient, clientForUser};
+export {adminClient, clientForUser};
