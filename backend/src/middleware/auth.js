@@ -20,4 +20,11 @@ async function requireAuth(req, res, next) {
   next();
 }
 
-export {requireAuth}
+function requireAdmin(req, res, next) {
+  if (req.user?.app_metadata?.role !== 'admin') {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+  next();
+}
+
+export { requireAuth, requireAdmin }

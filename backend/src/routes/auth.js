@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { adminClient } from '../lib/supabase.js';
-import { requireAuth } from '../middleware/auth.js';
+import { requireAuth, requireAdmin } from '../middleware/auth.js';
 
 const router = Router();
 
@@ -22,6 +22,14 @@ router.post('/signup', async (req, res) => {
   });
 
   if (error) return res.status(400).json({ error: error.message });
+
+  if (data.user) {
+    const { error: stampError } = await adminClient.auth.admin.updateUserById(data.user.id, {
+      app_metadata: { role: 'customer' },
+    });
+    if (stampError) return res.status(400).json({ error: stampError.message });
+  }
+
   res.status(201).json(data);
 });
 
@@ -52,6 +60,36 @@ router.get('/me', requireAuth, async (req, res) => {
 
   if (error) return res.status(400).json({ error: error.message });
   res.json({ user: req.user, profile });
+});
+
+router.post('/provider-request', requireAuth, async (req, res) => {
+  const { proof } = req.body || {};
+
+  if (!proof) {
+    return res.status(400).json({ error: 'proof is required' });
+  }
+
+  const { data, error } = await adminClient
+    .from('provider_requests')
+    .insert({ user_id: req.user.id, status: 'pending', proof });
+
+  if (error) return res.status(400).json({ error: error.message });
+  res.status(201).json(data);
+});
+
+router.patch('/role', requireAuth, requireAdmin, async (req, res) => {
+  const { userId, role } = req.body || {};
+
+  if (!['customer', 'service-provider'].includes(role)) {
+    return res.status(400).json({ error: 'unknown role' });
+  }
+
+  const { data, error } = await adminClient.auth.admin.updateUserById(userId, {
+    app_metadata: { role },
+  });
+
+  if (error) return res.status(400).json({ error: error.message });
+  res.json(data);
 });
 
 export default router;
