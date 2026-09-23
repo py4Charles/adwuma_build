@@ -82,6 +82,76 @@ router.post('/provider-request', requireAuth, async (req, res) => {
   res.status(201).json(data);
 });
 
+router.get('/provider-requests', requireAuth, requireAdmin, async (req, res) => {
+  const { data, error } = await adminClient
+    .from('provider_requests')
+    .select('*')
+    .order('created_at', { ascending: true });
+
+  if (error) return res.status(400).json({ error: error.message });
+  res.json(data);
+});
+
+router.post('/provider-requests/:id/approve', requireAuth, requireAdmin, async (req, res) => {
+  const { id } = req.params;
+
+  const { data: request, error: fetchError } = await adminClient
+    .from('provider_requests')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (fetchError) {
+    const status = fetchError.code === 'PGRST116' ? 404 : 400;
+    return res.status(status).json({ error: fetchError.message });
+  }
+
+  if (request.status !== 'pending') {
+    return res.status(409).json({ error: 'request is not pending' });
+  }
+
+  const { error: updateError } = await adminClient
+    .from('provider_requests')
+    .update({ status: 'approved' })
+    .eq('id', id);
+
+  if (updateError) return res.status(400).json({ error: updateError.message });
+
+  const { error: roleError } = await adminClient.auth.admin.updateUserById(request.user_id, {
+    app_metadata: { role: 'provider' },
+  });
+
+  if (roleError) return res.status(400).json({ error: roleError.message });
+  res.json({ id, status: 'approved' });
+});
+
+router.post('/provider-requests/:id/reject', requireAuth, requireAdmin, async (req, res) => {
+  const { id } = req.params;
+
+  const { data: request, error: fetchError } = await adminClient
+    .from('provider_requests')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (fetchError) {
+    const status = fetchError.code === 'PGRST116' ? 404 : 400;
+    return res.status(status).json({ error: fetchError.message });
+  }
+
+  if (request.status !== 'pending') {
+    return res.status(409).json({ error: 'request is not pending' });
+  }
+
+  const { error: updateError } = await adminClient
+    .from('provider_requests')
+    .update({ status: 'rejected' })
+    .eq('id', id);
+
+  if (updateError) return res.status(400).json({ error: updateError.message });
+  res.json({ id, status: 'rejected' });
+});
+
 router.patch('/role', requireAuth, requireAdmin, async (req, res) => {
   const { userId, role } = req.body || {};
 
