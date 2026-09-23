@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
+
 import "../styles/components.css";
 import { useAuth } from "../context/AuthContext.jsx";
 import { supabase, profilesApi, authApi } from "../lib/supabase.js";
@@ -118,17 +119,17 @@ const AccountSettingsPage = ({ isEmbedded, initialTab = "profile" }) => {
                         {initialTab === "profile" && (
                             <button
                                 onClick={() => setActiveTab("profile")}
-                                style={{ padding: "14px 16px", textAlign: "left", color: activeTab === "profile" ? "var(--color-gold)" : "var(--color-text-main)", border: activeTab === "profile" ? "1px solid var(--color-border)" : "1px solid transparent", borderRadius: "8px", cursor: "pointer", fontSize: "1rem", fontWeight: activeTab === "profile" ? "600" : "400", transition: "all 0.2s" }}
+                                style={{ padding: "14px 16px", textAlign: "left", color: activeTab === "profile" ? "var(--color-text-main)" : "var(--color-text-main)", border: activeTab === "profile" ? "1px solid var(--color-border)" : "1px solid transparent", borderRadius: "8px", cursor: "pointer", fontSize: "1rem", fontWeight: activeTab === "profile" ? "600" : "400", transition: "all 0.2s" }}
                             >
                                 👤 Profile Information
                             </button>
                         )}
                         {initialTab !== "profile" && (
                             <>
-                                <button onClick={() => setActiveTab("security")} style={{ padding: "14px 16px", textAlign: "left", background: activeTab === "security" ? "var(--color-surface)" : "transparent", color: activeTab === "security" ? "var(--color-gold)" : "var(--color-text-main)", border: activeTab === "security" ? "1px solid var(--color-border)" : "1px solid transparent", cursor: "pointer", fontSize: "1rem", fontWeight: activeTab === "security" ? "600" : "400" }}>
+                                <button onClick={() => setActiveTab("security")} style={{ padding: "14px 16px", textAlign: "left", background: activeTab === "security" ? "var(--color-surface-3)" : "transparent", color: activeTab === "security" ? "var(--color-blue)" : "var(--color-text-main)", border: activeTab === "security" ? "1px solid var(--color-border)" : "1px solid transparent", borderRadius: '8px', cursor: "pointer", fontSize: "1rem", fontWeight: activeTab === "security" ? "600" : "400" }}>
                                     🔒 Security & Password
                                 </button>
-                                <button onClick={() => setActiveTab("notifications")} style={{ padding: "14px 16px", textAlign: "left", background: activeTab === "notifications" ? "var(--color-surface)" : "transparent", color: activeTab === "notifications" ? "var(--color-gold)" : "var(--color-text-main)", border: activeTab === "notifications" ? "1px solid var(--color-border)" : "1px solid transparent", borderRadius: "8px", cursor: "pointer", fontSize: "1rem", fontWeight: activeTab === "notifications" ? "600" : "400" }}>
+                                <button onClick={() => setActiveTab("notifications")} style={{ padding: "14px 16px", textAlign: "left", background: activeTab === "notifications" ? "var(--color-surface-3)" : "transparent", color: activeTab === "notifications" ? "var(--color-blue)" : "var(--color-text-main)", border: activeTab === "notifications" ? "1px solid var(--color-border)" : "1px solid transparent", borderRadius: "8px", cursor: "pointer", fontSize: "1rem", fontWeight: activeTab === "notifications" ? "600" : "400" }}>
                                     🔔 Notification Preferences
                                 </button>
                             </>
@@ -136,19 +137,19 @@ const AccountSettingsPage = ({ isEmbedded, initialTab = "profile" }) => {
                     </aside>
 
                     {/* Content */}
-                    <div style={{ flex: 1, background: "var(--color-surface)", padding: "2.5rem", borderRadius: "16px", border: "1px solid var(--color-border)" }}>
+                    <div style={{ flex: 1, background: "var(--color-bg)", padding: "2.5rem", borderRadius: "16px", border: "1px solid var(--color-border)" }}>
 
                         {activeTab === "profile" && (
                             <div>
                                 <h2 style={{ fontSize: "1.5rem", color: "var(--color-text-main)", marginBottom: "1.5rem" }}>Profile Information</h2>
                                 <div style={{ display: "flex", alignItems: "center", gap: "1.5rem", marginBottom: "2rem", paddingBottom: "2rem", borderBottom: "1px solid var(--color-border)" }}>
-                                    <div style={{ width: "80px", height: "80px", borderRadius: "50%", background: "var(--color-gold)", color: "#000", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "2rem", fontWeight: "bold" }}>
+                                    <div style={{ width: "80px", height: "80px", borderRadius: "50%", background: "var(--color-blue-soft)", color: "#000", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "2rem", fontWeight: "bold" }}>
                                         {initials}
                                     </div>
                                     <div>
                                         <h3 style={{ margin: "0 0 4px 0", color: "var(--color-text-main)" }}>{displayName}</h3>
                                         <p style={{ margin: 0, color: "var(--color-text-dim)", fontSize: "0.9rem" }}>{user?.email}</p>
-                                        <span style={{ fontSize: "0.8rem", color: "var(--color-gold)", marginTop: "4px", display: "block" }}>
+                                        <span style={{ fontSize: "0.8rem", color: "var(--color-blue)", marginTop: "4px", display: "block" }}>
                                             {profile?.role === "provider" ? "Service Provider" : "Customer"}
                                         </span>
                                     </div>
@@ -209,7 +210,7 @@ const AccountSettingsPage = ({ isEmbedded, initialTab = "profile" }) => {
 
                         {activeTab === "notifications" && (
                             <div>
-                                <h2 style={{ fontSize: "1.5rem", color: "var(--color-text-main)", marginBottom: "1.5rem" }}>Notification Preferences</h2>
+                                <h2 style={{ fontSize: "1.5rem", color: "var(--color-blue)" }}>Notification Preferences</h2>
                                 <p style={{ color: "var(--color-text-muted)", marginBottom: "2rem" }}>Choose how we communicate with you.</p>
                                 <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                                     {[
@@ -227,7 +228,7 @@ const AccountSettingsPage = ({ isEmbedded, initialTab = "profile" }) => {
                                                 onClick={() => toggleNotification(key)}
                                                 style={{
                                                     width: "50px", height: "28px", borderRadius: "34px", cursor: "pointer",
-                                                    background: notifications[key] ? "var(--color-gold)" : "#333",
+                                                    background: notifications[key] ? "var(--color-blue)" : "#333",
                                                     position: "relative", transition: "background 0.3s", flexShrink: 0,
                                                 }}
                                             >

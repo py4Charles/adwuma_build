@@ -1,0 +1,2 @@
+#GET Request
+GET /api/health

@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { apiFetch } from './api.js';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -9,20 +10,37 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 export const authApi = {
     /** Sign up a new user (customer or provider) */
     signUp: async ({ email, password, username, role = "customer" }) => {
-        return supabase.auth.signUp({
-            email,
-            password,
-            options: { data: { username, role } },
+        const { data, error } = await apiFetch('/api/auth/signup', {
+            method: 'POST',
+            body: { email, password, username, role },
         });
+        if (!error && data.session) {
+            await supabase.auth.setSession(data.session);
+        }
+        return { data, error };
     },
 
     /** Sign in with email + password */
     signIn: async ({ email, password }) => {
-        return supabase.auth.signInWithPassword({ email, password });
+        const { data, error } = await apiFetch('/api/auth/signin', {
+            method: 'POST',
+            body: { email, password },
+        });
+        if (!error && data.session) {
+            await supabase.auth.setSession(data.session);
+        }
+        return { data, error };
     },
 
     /** Sign out */
-    signOut: () => supabase.auth.signOut(),
+    signOut: async () => {
+        const { data: { session } } = await supabase.auth.getSession();
+        await apiFetch('/api/auth/signout', {
+            method: 'POST',
+            token: session?.access_token,
+        });
+        return supabase.auth.signOut();
+    },
 
     /** Get current session */
     getSession: () => supabase.auth.getSession(),
