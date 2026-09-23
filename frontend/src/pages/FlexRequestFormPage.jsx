@@ -204,7 +204,7 @@ const FlexRequestFormPage = () => {
                 <label style={{ display: "block", fontSize: "0.75rem", textTransform: "uppercase", color: "var(--color-blue)", fontWeight: "800", marginBottom: "8px", letterSpacing: "1px" }}>When?</label>
                 <input
                   type="datetime-local"
-                  style={{ background: "blue", border: "none", outline: "none", fontSize: "1rem", width: "100%", color: "var(--color-text-main)", padding: 0, colorScheme: "dark" }}
+                  style={{ background: "var(--color-border)", border: "1px solid var(--color-border)", outline: "1px solid var(--color-border)", fontSize: "1rem", width: "100%", color: "var(--color-text-main)", padding: 0, colorScheme: "dark" }}
                   value={form.scheduled_at}
                   onChange={(e) => setForm({ ...form, scheduled_at: e.target.value })}
                   required
@@ -224,10 +224,10 @@ const FlexRequestFormPage = () => {
               disabled={submitting}
               style={{
                 width: "100%", padding: "1.2rem", borderRadius: "18px",
-                background: "var(--color-gold)", color: "black", fontSize: "1.15rem",
+                background: "var(--color-blue)", color: "var(--color-bg)", fontSize: "1.15rem",
                 fontWeight: "800", border: "none", cursor: "pointer",
                 display: "flex", alignItems: "center", justifyContent: "center", gap: "12px",
-                boxShadow: "0 15px 35px rgba(212, 175, 55, 0.25)", opacity: submitting ? 0.7 : 1,
+                boxShadow: "0 1px 40px rgb(51, 51, 209, 0.2)", opacity: submitting ? 0.7 : 1,
               }}
             >
               {submitting ? "Posting…" : "Proceed with request"}
