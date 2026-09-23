@@ -1,19 +1,22 @@
 import { useState, useEffect, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar.jsx";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 
 import "../styles/components.css";
 import { useAuth } from "../context/AuthContext.jsx";
-import { supabase, messagesApi, requestsApi } from "../lib/supabase.js";
+import { supabase, messagesApi, profilesApi } from "../lib/supabase.js";
 
 const ChatPage = () => {
     const { chatId } = useParams(); // request id
     const navigate = useNavigate();
-    const { user, profile } = useAuth();
+    const [searchParams] = useSearchParams();
+    const { user } = useAuth();
 
     const [messages, setMessages] = useState([]);
     const [inputText, setInputText] = useState("");
+    const [sending, setSending] = useState(false);
+    const [sendError, setSendError] = useState("");
     const [request, setRequest] = useState(null);
+    const [customer, setCustomer] = useState(null);
     const [loading, setLoading] = useState(true);
     const messagesEndRef = useRef(null);
 
@@ -21,20 +24,31 @@ const ChatPage = () => {
 
     useEffect(() => { scrollToBottom(); }, [messages]);
 
+    // `/chat/new` is not a real conversation — conversations are tied to a
+    // request. Route into the booking flow so a request (and its chat) exists.
+    useEffect(() => {
+        if (chatId !== "new") return;
+        if (!user) { navigate("/login"); return; }
+        const artisan = searchParams.get("artisan");
+        navigate(`/service-request${artisan ? `?artisan=${encodeURIComponent(artisan)}` : ""}`);
+    }, [chatId, user, navigate, searchParams]);
+
     // Load request info + messages
     useEffect(() => {
-        if (!chatId || !user) { setLoading(false); return; }
+        if (!chatId || !user || chatId === "new") { setLoading(false); return; }
         const init = async () => {
             setLoading(true);
-            const [{ data: req }, { data: msgs }] = await Promise.all([
-                supabase
-                    .from("service_requests")
-                    .select("*, artisan:artisan_profiles(id, subcategory, profiles(username, first_name, last_name))")
-                    .eq("id", chatId)
-                    .single(),
+            const { data: req } = await supabase
+                .from("service_requests")
+                .select("*, artisan:artisan_profiles(id, user_id, subcategory, profiles(username, first_name, last_name))")
+                .eq("id", chatId)
+                .single();
+            const [{ data: msgs }, customerRes] = await Promise.all([
                 messagesApi.list(chatId),
+                req?.customer_id ? profilesApi.get(req.customer_id) : Promise.resolve({ data: null }),
             ]);
-            setRequest(req);
+            setRequest(req || null);
+            setCustomer(customerRes?.data || null);
             setMessages(msgs || []);
             setLoading(false);
         };
@@ -56,35 +70,53 @@ const ChatPage = () => {
 
     const handleSendMessage = async (e) => {
         e.preventDefault();
-        if (!inputText.trim() || !user) return;
+        if (!inputText.trim() || !user || sending) return;
 
         const text = inputText.trim();
         setInputText("");
+        setSending(true);
+        setSendError("");
 
-        const { error } = await messagesApi.send({
+        const { data, error } = await messagesApi.send({
             requestId: chatId,
             senderId: user.id,
             text,
         });
 
-        if (error) console.error("Send message error:", error);
+        setSending(false);
+
+        if (error) {
+            console.error("Send message error:", error);
+            setSendError(error.message || "Could not send your message. Please try again.");
+            setInputText(text);
+            return;
+        }
+
+        // Append the confirmation so the message shows up even if the
+        // realtime event is delayed; dedupe in case realtime already delivered it.
+        if (data) {
+            setMessages((prev) => (prev.find((m) => m.id === data.id) ? prev : [...prev, data]));
+        }
     };
 
+    const isArtisanView = !!request && user?.id === request.artisan?.user_id;
+
     const getOtherPartyName = () => {
-        if (!request) return "Artisan";
-        const art = request.artisan;
-        if (!art?.profiles) return "Artisan";
-        const p = art.profiles;
-        return p.first_name ? `${p.first_name} ${p.last_name}` : p.username;
+        if (isArtisanView) {
+            if (!customer) return "Customer";
+            return customer.first_name
+                ? `${customer.first_name} ${customer.last_name || ""}`
+                : customer.username;
+        }
+        const art = request?.artisan?.profiles;
+        if (!art) return "Artisan";
+        return art.first_name ? `${art.first_name} ${art.last_name || ""}` : art.username;
     };
 
     const getInitials = (name) =>
         name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2);
 
     const otherName = getOtherPartyName();
-    const myName = profile?.first_name
-        ? `${profile.first_name} ${profile.last_name || ""}`
-        : profile?.username || "You";
 
     const formatTime = (iso) =>
         new Date(iso).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
@@ -176,7 +208,7 @@ const ChatPage = () => {
 
                             {messages.length === 0 && !loading && (
                                 <div style={{ textAlign: "center", padding: "2rem", color: "var(--color-text-dim)" }}>
-                                    No messages yet. Start the conversation!
+                                    {user ? "No messages yet. Start the conversation!" : "Please log in to send and view messages."}
                                 </div>
                             )}
                         </>
@@ -186,30 +218,38 @@ const ChatPage = () => {
 
                 {/* Input */}
                 <div style={{ padding: "1rem", borderTop: "1px solid var(--color-border)", background: "var(--color-surface)" }}>
+                    {sendError && (
+                        <div style={{ backgroundColor: "rgba(244,67,54,0.1)", border: "1px solid #f44336", color: "#f44336", padding: "10px 14px", borderRadius: "10px", fontSize: "0.85rem", marginBottom: "10px" }}>
+                            {sendError}
+                        </div>
+                    )}
                     <form onSubmit={handleSendMessage} style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
                         <input
                             type="text"
                             value={inputText}
                             onChange={(e) => setInputText(e.target.value)}
                             placeholder="Type a message..."
+                            disabled={!user || sending}
                             style={{
                                 flex: 1, padding: "12px 16px", borderRadius: "24px",
                                 border: "1px solid var(--color-border)", background: "var(--color-bg)",
                                 color: "var(--color-text-main)", outline: "none",
+                                opacity: !user || sending ? 0.6 : 1,
                             }}
                         />
                         <button
                             type="submit"
+                            disabled={!user || sending}
                             style={{
-                                background: inputText.trim() ? "var(--color-blue-light)" : "var(--color-border)",
-                                color: inputText.trim() ? "#fff" : "var(--color-text-dim)",
+                                background: inputText.trim() && !sending ? "var(--color-blue-light)" : "var(--color-border)",
+                                color: inputText.trim() && !sending ? "#fff" : "var(--color-text-dim)",
                                 border: "none", width: "44px", height: "44px", borderRadius: "50%",
-                                cursor: inputText.trim() ? "pointer" : "default",
+                                cursor: inputText.trim() && !sending ? "pointer" : "default",
                                 display: "flex", justifyContent: "center", alignItems: "center",
                                 transition: "all 0.2s",
                             }}
                         >
-                            ➤
+                            {sending ? "⏳" : "➤"}
                         </button>
                     </form>
                 </div>
