@@ -11,6 +11,10 @@ router.post('/signup', async (req, res) => {
     return res.status(400).json({ error: 'email and password are required' });
   }
 
+  if (!['customer', 'service-provider'].includes(role)) {
+    return res.status(400).json({ error: 'unknown role' });
+  }
+
   const { data, error } = await adminClient.auth.signUp({
     email,
     password,
