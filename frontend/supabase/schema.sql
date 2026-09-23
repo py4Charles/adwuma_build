@@ -189,6 +189,15 @@ create table if not exists public.notifications (
   created_at timestamptz default now()
 );
 
+-- 8b. PROVIDER REQUESTS (service-provider verification)
+create table if not exists public.provider_requests (
+  id          uuid primary key default gen_random_uuid(),
+  user_id     uuid not null references public.profiles(id) on delete cascade,
+  status      text not null default 'pending' check (status in ('pending','approved','rejected')),
+  proof       text not null,
+  created_at  timestamptz default now()
+);
+
 -- ─────────────────────────────────────────────────────────────
 -- 9. ROW LEVEL SECURITY
 -- ─────────────────────────────────────────────────────────────
@@ -201,6 +210,7 @@ alter table public.wallet_transactions enable row level security;
 alter table public.reviews             enable row level security;
 alter table public.support_tickets     enable row level security;
 alter table public.notifications       enable row level security;
+alter table public.provider_requests   enable row level security;
 
 -- PROFILES
 create policy "Profiles: public read"    on public.profiles for select using (true);
@@ -263,6 +273,10 @@ create policy "Tickets: own insert"      on public.support_tickets for insert wi
 -- NOTIFICATIONS
 create policy "Notifs: own read"         on public.notifications for select using (auth.uid() = user_id);
 create policy "Notifs: own update"       on public.notifications for update using (auth.uid() = user_id);
+
+-- PROVIDER REQUESTS
+create policy "ProviderReq: own insert"  on public.provider_requests for insert with check (auth.uid() = user_id);
+create policy "ProviderReq: own read"    on public.provider_requests for select using (auth.uid() = user_id);
 
 -- ─────────────────────────────────────────────────────────────
 -- 10. REALTIME (enable for messages & notifications)

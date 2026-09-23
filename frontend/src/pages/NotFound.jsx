@@ -6,7 +6,7 @@ import "../styles/components.css";
 const NotFound = () => {
     return (
         <div className="page">
-            <Navbar />
+            {/* <Navbar /> */}
             <main className="notfound-container">
                 <div className="notfound-content">
                     <h1 className="notfound-code"> 404 </h1>
@@ -24,7 +24,7 @@ const NotFound = () => {
                 </div>
             </main>
 
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 };

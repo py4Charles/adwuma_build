@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "../styles/home.css";
-import engineerHero from "../assets/engineer_hero.png";
+// import engineerHero from "../assets/engineer_hero.png";
+import engineerHero from "../assets/engineer_hero.jpeg";
 
 const HeroSection = () => {
     return (

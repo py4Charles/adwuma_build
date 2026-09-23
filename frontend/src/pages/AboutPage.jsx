@@ -1,15 +1,21 @@
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
+
+import logo from '../assets/icon.png'
 import "../styles/utils.css";
+import "../styles/home.css";
 
 const AboutPage = () => {
     return (
         <div className="page">
             <Navbar />
             <main className="page-content" style={{ maxWidth: '1000px', paddingBottom: '80px' }}>
-                <div className="text-header" style={{maxWidth: '1200px'}}>
-                    <h1>About <span>Adwuma</span></h1>
-                    <p>Elevating the standard of service connections.</p>
+                <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    maxWidth: "1200px",
+                }}>
+                    <img src={logo} alt="Adwuma logo" className="homepage-logo" />
                 </div>
 
                 <section className="text-section">

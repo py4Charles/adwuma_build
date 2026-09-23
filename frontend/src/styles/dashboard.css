@@ -37,18 +37,16 @@
 }
 
 .dashboard-sidebar::-webkit-scrollbar-thumb:hover {
-  background: var(--color-gold);
+  background: var(--color-blue);
 }
 
 .sidebar-logo {
   font-family: var(--font-heading);
   font-weight: 800;
-  color: var(--color-gold);
-  font-size: 1.5rem;
-  margin-bottom: 40px;
+  margin-bottom: 0px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
 }
 
 .sidebar-menu {
@@ -73,20 +71,20 @@
   gap: 12px;
   padding: 12px 16px;
   border-radius: 12px;
-  color: var(--color-text-muted);
+  color: var(--color-text-main);
   font-weight: 500;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .sidebar-link:hover {
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--color-text-main);
+  background:  rgb(226, 226, 238, 0.5);
+  color: var(--color-text-muted);
 }
 
 .sidebar-link.active {
-  background: rgba(212, 175, 55, 0.1);
-  color: var(--color-gold);
+  background:  rgb(51, 51, 209, 0.2);
+  color: var(--color-blue);
 }
 
 /* Dashboard Main Content */
@@ -107,7 +105,7 @@
 }
 
 .welcome-section span {
-  color: var(--color-gold);
+  color: var(--color-blue);
 }
 
 /* Premium Section Cards */
@@ -133,7 +131,7 @@
 }
 
 .service-type-card {
-  background: var(--color-gold);
+  background: var(--color-blue);
   padding: 24px;
   border-radius: 20px;
   display: flex;
@@ -147,7 +145,7 @@
 .service-type-card:hover {
   transform: translateY(-5px);
   filter: brightness(1.1);
-  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+  box-shadow: 0 10px 20px  rgb(51, 51, 209, 0.2);
 }
 
 .service-type-card .icon-box {
@@ -195,7 +193,7 @@
 
 .flex-input {
   width: 100%;
-  background: transparent;
+  background: var(--color-surface-2);
   border: none;
   color: var(--color-text-main);
   font-size: 1.1rem;
@@ -292,25 +290,25 @@
   left: 20px;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--color-gold);
+  color: var(--color-text-main);
   opacity: 0.7;
 }
 
 .marketplace-search-input {
   width: 100%;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--color-bg);
   border: 1px solid var(--color-border);
   padding: 16px 20px 16px 55px;
   border-radius: 12px;
-  color: white;
+  color: var(--color-text-main);
   font-size: 1rem;
   transition: all 0.3s ease;
 }
 
 .marketplace-search-input:focus {
-  border-color: var(--color-gold);
-  background: rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+  border-color: var(--color-surface-3);
+  background: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 2px  rgb(51, 51, 209, 0.2);
   outline: none;
 }
 
@@ -337,9 +335,9 @@
 }
 
 .filter-select {
-  background: #111 !important;
+  background: var(--color-bg) !important;
   border: 1px solid var(--color-border);
-  color: var(--color-gold) !important;
+  color: var(--color-text-main) !important;
   padding: 10px 14px;
   border-radius: 8px;
   font-size: 0.85rem;
@@ -350,14 +348,14 @@
 }
 
 .filter-select option {
-  background: #111;
+  background: var(--color-bg);
   color: var(--color-gold);
   padding: 10px;
 }
 
 .filter-select:hover {
-  background: #1a1a1a !important;
-  border-color: var(--color-gold);
+  opacity: 0.5;
+  border-color: var(--color-border);
 }
 
 .verified-toggle {
@@ -365,7 +363,7 @@
   align-items: center;
   gap: 10px;
   padding: 10px 16px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--color-text-muted);
   border: 1px solid var(--color-border);
   border-radius: 8px;
   cursor: pointer;
@@ -401,9 +399,9 @@
 }
 
 .artisan-card-v2:hover {
-  transform: translateY(-10px);
-  border-color: var(--color-gold);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+  border-color: var(--color-surface-2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .artisan-card-header {
@@ -454,7 +452,7 @@
 
 .badge-featured { background: var(--color-gold); color: black; }
 .badge-top-rated { background: #2196f3; color: white; }
-.badge-fast { background: #ff9800; color: white; }
+.badge-fast { background: #ffd48f; color: var(--color-text-main); }
 
 .verified-indicator {
   position: absolute;
@@ -489,7 +487,7 @@
 .artisan-name-v2 {
   font-size: 1.15rem;
   font-weight: 700;
-  color: white;
+  color: var(--color-text-main);
   margin: 0;
 }
 
@@ -569,7 +567,7 @@
 .btn-view-profile {
   background: transparent;
   border: 1px solid var(--color-border);
-  color: white;
+  color: var(--color-text-main);
   padding: 10px;
   border-radius: 10px;
   font-size: 0.85rem;
