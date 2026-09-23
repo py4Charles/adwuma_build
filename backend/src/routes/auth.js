@@ -11,7 +11,7 @@ router.post('/signup', async (req, res) => {
     return res.status(400).json({ error: 'email and password are required' });
   }
 
-  if (!['customer', 'service-provider'].includes(role)) {
+  if (!['customer', 'provider'].includes(role)) {
     return res.status(400).json({ error: 'unknown role' });
   }
 
@@ -21,7 +21,12 @@ router.post('/signup', async (req, res) => {
     options: { data: { username, role } },
   });
 
-  if (error) return res.status(400).json({ error: error.message });
+  if (error) {
+    if (error.message === 'email rate limit exceeded') {
+      return res.status(429).json({ error: 'Too many signups. Please try again in about an hour.' });
+    }
+    return res.status(400).json({ error: error.message });
+  }
 
   if (data.user) {
     const { error: stampError } = await adminClient.auth.admin.updateUserById(data.user.id, {
@@ -80,7 +85,7 @@ router.post('/provider-request', requireAuth, async (req, res) => {
 router.patch('/role', requireAuth, requireAdmin, async (req, res) => {
   const { userId, role } = req.body || {};
 
-  if (!['customer', 'service-provider'].includes(role)) {
+  if (!['customer', 'provider'].includes(role)) {
     return res.status(400).json({ error: 'unknown role' });
   }
 
