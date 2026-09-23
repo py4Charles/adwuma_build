@@ -91,7 +91,7 @@ const ChatPage = () => {
 
     return (
         <div className="page" style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
-            <Navbar />
+            {/* <Navbar /> */}
 
             <main style={{ flex: 1, display: "flex", flexDirection: "column", maxWidth: "800px", margin: "0 auto", width: "100%", background: "var(--color-bg)" }}>
 
@@ -116,7 +116,7 @@ const ChatPage = () => {
                         >
                             ←
                         </button>
-                        <div style={{ width: "40px", height: "40px", borderRadius: "50%", background: "var(--color-gold)", display: "flex", justifyContent: "center", alignItems: "center", color: "#000", fontWeight: "bold" }}>
+                        <div style={{ width: "40px", height: "40px", borderRadius: "50%", background: "var(--color-blue-light)", display: "flex", justifyContent: "center", alignItems: "center", color: "#fff", fontWeight: "bold" }}>
                             {getInitials(otherName)}
                         </div>
                         <div>
@@ -156,9 +156,9 @@ const ChatPage = () => {
                                     >
                                         <div
                                             style={{
-                                                background: isMe ? "rgba(212, 175, 55, 0.15)" : "var(--color-surface)",
+                                                background: isMe ? "rgba(51, 51, 209, 0.15)" : "var(--color-surface)",
                                                 color: "var(--color-text-main)",
-                                                border: isMe ? "1px solid rgba(212, 175, 55, 0.3)" : "1px solid var(--color-border)",
+                                                border: isMe ? "1px solid rgba(51, 51, 209, 0.15)" : "1px solid var(--color-border)",
                                                 padding: "12px 16px",
                                                 borderRadius: isMe ? "16px 16px 0 16px" : "16px 16px 16px 0",
                                                 fontSize: "0.95rem",
@@ -201,8 +201,8 @@ const ChatPage = () => {
                         <button
                             type="submit"
                             style={{
-                                background: inputText.trim() ? "var(--color-gold)" : "var(--color-border)",
-                                color: inputText.trim() ? "#000" : "var(--color-text-dim)",
+                                background: inputText.trim() ? "var(--color-blue-light)" : "var(--color-border)",
+                                color: inputText.trim() ? "#fff" : "var(--color-text-dim)",
                                 border: "none", width: "44px", height: "44px", borderRadius: "50%",
                                 cursor: inputText.trim() ? "pointer" : "default",
                                 display: "flex", justifyContent: "center", alignItems: "center",

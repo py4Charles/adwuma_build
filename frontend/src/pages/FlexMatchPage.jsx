@@ -15,21 +15,21 @@ const FlexMatchPage = () => {
         const timer = setTimeout(() => {
             setMatchStatus("found");
             addToast("A professional just accepted your request!", "success");
-        }, 4500);
+        }, 5000);
 
         return () => clearTimeout(timer);
     }, []);
 
     return (
         <div className="page" style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
-            <Navbar />
+            {/* <Navbar /> */}
 
             <main style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "2rem" }}>
 
                 {matchStatus === "searching" && (
                     <div style={{ textAlign: "center" }}>
-                        <h1 style={{ color: "var(--color-text-main)", marginBottom: "1rem", fontSize: "2rem" }}>Finding nearby professional...</h1>
-                        <p style={{ color: "var(--color-text-muted)", marginBottom: "2rem" }}>Broadcasting your Flex request to verified artisans within 5km.</p>
+                        <h1 style={{ color: "var(--color-text-main)", marginBottom: "1rem", fontSize: "3rem" }}>Finding nearby professional...</h1>
+                        <p style={{ color: "var(--color-text-muted)", marginBottom: "2rem", fontSize: "1rem" }}>Broadcasting your Flex request to verified artisans within 5km.</p>
 
                         <div className="radar-container">
                             <div className="radar-pulse"></div>
