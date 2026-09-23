@@ -4,20 +4,25 @@ export async function apiFetch(path, { method = 'GET', token, body } = {}) {
   const headers = { 'Content-Type': 'application/json' };
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  const res = await fetch(`${API_URL}${path}`, {
-    method,
-    headers,
-    body: body ? JSON.stringify(body) : undefined,
-  });
+  try {
+    const res = await fetch(`${API_URL}${path}`, {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined,
+    });
 
-  if (res.status === 204) return { data: null, error: null };
+    if (res.status === 204) return { data: null, error: null };
 
-  const json = await res.json().catch(() => null);
+    const json = await res.json().catch(() => null);
 
-  if (!res.ok) {
-    const message = json?.error ?? json?.message ?? `Request failed with status ${res.status}`;
-    return { data: null, error: { message } };
+    if (!res.ok) {
+      const message = json?.error ?? json?.message ?? `Request failed with status ${res.status}`;
+      return { data: null, error: { message } };
+    }
+
+    return { data: json, error: null }
+    
+  } catch {
+    return { data: null, error: { message: 'Server unreachable' } }
   }
-
-  return { data: json, error: null };
 }
