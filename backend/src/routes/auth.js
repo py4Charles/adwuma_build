@@ -110,18 +110,18 @@ router.post('/provider-requests/:id/approve', requireAuth, requireAdmin, async (
     return res.status(409).json({ error: 'request is not pending' });
   }
 
+  const { error: roleError } = await adminClient.auth.admin.updateUserById(request.user_id, {
+    app_metadata: { role: 'provider' },
+  });
+
+  if (roleError) return res.status(400).json({ error: roleError.message });
+
   const { error: updateError } = await adminClient
     .from('provider_requests')
     .update({ status: 'approved' })
     .eq('id', id);
 
   if (updateError) return res.status(400).json({ error: updateError.message });
-
-  const { error: roleError } = await adminClient.auth.admin.updateUserById(request.user_id, {
-    app_metadata: { role: 'provider' },
-  });
-
-  if (roleError) return res.status(400).json({ error: roleError.message });
   res.json({ id, status: 'approved' });
 });
 
