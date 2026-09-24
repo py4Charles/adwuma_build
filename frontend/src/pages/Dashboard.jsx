@@ -342,9 +342,9 @@ const Dashboard = () => {
         <div className="dashboard-layout">
             {/* SIDEBAR NAVIGATION (LEFT SIDE) */}
             <aside className="dashboard-sidebar">
-                <Link to="/" className="sidebar-logo" style={{ textDecoration: 'none' }}>
-                    <img src={logo} alt="Adwuma Logo" style={{ width: 'auto', height: '120px', objectFit: 'contain' }} />
-                    {/* <span>Adwuma</span> */}
+                <Link to="/" className="sidebar-logo" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none' }}>
+                    <img src={logo} alt="Adwuma Logo" style={{ width: 'auto', height: '90px', objectFit: 'contain' }} />
+                    <span style={{ color: "var(--color-text-main)", lineHeight: "1", marginTop: "-8px" }}>Adwuma</span>
                 </Link>
 
                 <nav className="sidebar-menu">

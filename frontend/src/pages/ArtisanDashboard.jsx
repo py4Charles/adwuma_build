@@ -106,9 +106,9 @@ const ArtisanDashboard = () => {
     return (
         <div className="dashboard-layout">
             <aside className="dashboard-sidebar" style={{ background: "var(--color-bg)" }}>
-                <Link to="/" className="sidebar-logo" style={{ display: 'grid', textDecoration: "none", marginBottom: "20px", justifyContent: 'middle', alignItems: 'center' }}>
-                    <img src={logo} alt="Adwuma Logo" style={{ width: "auto", height: "120px", justifyContent: 'center', alignItems: 'middle' }} />
-                    <span style={{ color: "var(--color-text-main)", justifyContent: 'center' }}>Provider Hub</span>
+                <Link to="/" className="sidebar-logo" style={{ display: 'flex', flexDirection: 'column', textDecoration: "none", marginBottom: "20px", gap: "0" }}>
+                    <img src={logo} alt="Adwuma Logo" style={{ width: "auto", height: "120px", objectFit: 'contain' }} />
+                    <span style={{ color: "var(--color-text-main)", lineHeight: "1", marginTop: "-8px", fontSize: '1.2rem' }}>Provider Hub</span>
                 </Link>
 
                 <nav className="sidebar-menu">
@@ -128,7 +128,7 @@ const ArtisanDashboard = () => {
                             onClick={() => setProfileMenuOpen(!profileMenuOpen)}
                             style={{ display: "flex", alignItems: "center", gap: "12px", padding: "12px", borderRadius: "16px", cursor: "pointer", background: profileMenuOpen ? "rgba(255,255,255,0.05)" : "transparent" }}
                         >
-                            <div style={{ width: "40px", height: "40px", borderRadius: "50%", background: "var(--color-gold)", display: "flex", alignItems: "center", justifyContent: "center", color: "black", fontWeight: "800", fontSize: "1rem" }}>
+                            <div style={{ width: "40px", height: "40px", borderRadius: "50%", background: "var(--color-blue-soft)", display: "flex", alignItems: "center", justifyContent: "center", color: "black", fontWeight: "800", fontSize: "1rem" }}>
                                 {artisanName.charAt(0)}
                             </div>
                             <div style={{ flex: 1 }}>
