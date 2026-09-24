@@ -6,19 +6,17 @@
 // import LiveTrackingPage from "./LiveTrackingPage.jsx";
 // import OtpVerificationPage from "./OtpVerificationPage.jsx";
 // import SignupPage from "./SignupPage";
-import NotFound from "./NotFound.jsx";
-import FlexMatchPage from "./FlexMatchPage.jsx";
+// import NotFound from "./NotFound.jsx";
+// import FlexMatchPage from "./FlexMatchPage.jsx";
+import LogoutConfirmModal from "../components/LogoutConfirmModal.jsx";
 
 const SandBox = () => {
     return (
         <div style={{ display: "grid", gap: "20px" }}>
-            <h2 style={{padding: '20px 10px', display: 'flex', justifyContent: 'middle'}}>Component Playground</h2>
+            <h2 style={{ padding: '20px 10px', display: 'flex', justifyContent: 'middle' }}>Component Playground</h2>
 
 
-            {/* <LiveTrackingPage/> */}
-            {/* <NotFound/> */}
-            {/* <OtpVerificationPage/> */}
-            <FlexMatchPage/>
+            <LogoutConfirmModal />
 
         </div>
     );
