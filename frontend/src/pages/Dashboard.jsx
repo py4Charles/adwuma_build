@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MyRequestsPage from "./MyRequestsPage";
 import WalletPage from "./WalletPage.jsx";
@@ -79,6 +79,7 @@ const Dashboard = () => {
     const [sortBy, setSortBy] = useState("Recommended");
     const [visibleArtisans, setVisibleArtisans] = useState(12);
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+    const profileMenuRef = useRef(null);
     const [activeRequestCount, setActiveRequestCount] = useState(0);
     const [completedJobCount, setCompletedJobCount] = useState(0);
     const [notifications, setNotifications] = useState([]);
@@ -103,6 +104,18 @@ const Dashboard = () => {
         };
         loadStats();
     }, [user]);
+
+    // Close profile dropdown when clicking outside of it
+    useEffect(() => {
+        if (!profileMenuOpen) return;
+        const handleClickOutside = (e) => {
+            if (profileMenuRef.current && !profileMenuRef.current.contains(e.target)) {
+                setProfileMenuOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [profileMenuOpen]);
 
     // Reset pagination when filters change
     useEffect(() => {
@@ -347,7 +360,7 @@ const Dashboard = () => {
                     ))}
 
                     {/* User Account Section at Bottom */}
-                    <div style={{ marginTop: 'auto', borderTop: '1px solid var(--color-surface-3)', paddingTop: '20px', position: 'relative' }}>
+                    <div ref={profileMenuRef} style={{ marginTop: 'auto', borderTop: '1px solid var(--color-surface-3)', paddingTop: '20px', position: 'relative' }}>
                         <div
                             onClick={() => setProfileMenuOpen(!profileMenuOpen)}
                             style={{

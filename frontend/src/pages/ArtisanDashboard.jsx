@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/dashboard.css";
 import logo from "../assets/icon.png";
@@ -19,6 +19,7 @@ const ArtisanDashboard = () => {
     const { user, profile } = useAuth();
     const [activeTab, setActiveTab] = useState("Overview");
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+    const profileMenuRef = useRef(null);
 
     // Live data
     const [artisanProfile, setArtisanProfile] = useState(null);
@@ -79,6 +80,18 @@ const ArtisanDashboard = () => {
     const formatDate = (iso) =>
         new Date(iso).toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
 
+    // Close profile dropdown when clicking outside of it
+    useEffect(() => {
+        if (!profileMenuOpen) return;
+        const handleClickOutside = (e) => {
+            if (profileMenuRef.current && !profileMenuRef.current.contains(e.target)) {
+                setProfileMenuOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [profileMenuOpen]);
+
     const balance = wallet ? Number(wallet.balance) : 0;
     const rating = artisanProfile?.rating || 0;
     const jobsDone = artisanProfile?.jobs_completed || 0;
@@ -110,7 +123,7 @@ const ArtisanDashboard = () => {
                         </div>
                     ))}
 
-                    <div style={{ marginTop: "auto", borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "20px", position: "relative" }}>
+                    <div ref={profileMenuRef} style={{ marginTop: "auto", borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "20px", position: "relative" }}>
                         <div
                             onClick={() => setProfileMenuOpen(!profileMenuOpen)}
                             style={{ display: "flex", alignItems: "center", gap: "12px", padding: "12px", borderRadius: "16px", cursor: "pointer", background: profileMenuOpen ? "rgba(255,255,255,0.05)" : "transparent" }}
