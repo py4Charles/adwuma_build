@@ -4,6 +4,7 @@ import MyRequestsPage from "./MyRequestsPage";
 import WalletPage from "./WalletPage.jsx";
 import ComplaintsPage from "./ComplaintsPage.jsx";
 import AccountSettingsPage from "./AccountSettingsPage.jsx";
+import LogoutConfirmModal from "../components/LogoutConfirmModal.jsx";
 
 import logo from "../assets/icon.png";
 import "../styles/dashboard.css";
@@ -79,6 +80,7 @@ const Dashboard = () => {
     const [sortBy, setSortBy] = useState("Recommended");
     const [visibleArtisans, setVisibleArtisans] = useState(12);
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+    const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
     const profileMenuRef = useRef(null);
     const [activeRequestCount, setActiveRequestCount] = useState(0);
     const [completedJobCount, setCompletedJobCount] = useState(0);
@@ -312,6 +314,13 @@ const Dashboard = () => {
         navigate("/");
     };
 
+    const confirmLogout = () => {
+        authApi.signOut().then(() => {
+            setShowLogoutConfirm(false);
+            handleLogout();
+        });
+    };
+
     const handleNavClick = (name) => {
         if (name === "Log Out") {
             authApi.signOut().then(() => handleLogout());
@@ -427,7 +436,7 @@ const Dashboard = () => {
                                 </div>
                                 <div
                                     className="sidebar-link"
-                                    onClick={() => handleLogout()}
+                                    onClick={() => { setProfileMenuOpen(false); setShowLogoutConfirm(true); }}
                                     style={{ padding: '10px 14px', color: '#ff4d4d' }}
                                 >
                                     <Icons.Logout /> Log Out
@@ -1067,6 +1076,12 @@ const Dashboard = () => {
                     </section>
                 )}
             </main>
+
+            <LogoutConfirmModal
+                open={showLogoutConfirm}
+                onCancel={() => setShowLogoutConfirm(false)}
+                onConfirm={confirmLogout}
+            />
         </div>
     );
 };

@@ -4,6 +4,7 @@ import "../styles/dashboard.css";
 import logo from "../assets/icon.png";
 import { useAuth } from "../context/AuthContext.jsx";
 import { authApi, artisansApi, requestsApi } from "../lib/supabase.js";
+import LogoutConfirmModal from "../components/LogoutConfirmModal.jsx";
 
 const Icons = {
     Dashboard: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /></svg>,
@@ -19,6 +20,7 @@ const ArtisanDashboard = () => {
     const { user, profile } = useAuth();
     const [activeTab, setActiveTab] = useState("Overview");
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+    const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
     const profileMenuRef = useRef(null);
 
     // Live data
@@ -143,7 +145,7 @@ const ArtisanDashboard = () => {
                                 <div className="sidebar-link" onClick={() => { setActiveTab("Profile"); setProfileMenuOpen(false); }} style={{ padding: "10px 14px", color: "#eee" }}>
                                     <Icons.Profile /> My Profile
                                 </div>
-                                <div className="sidebar-link" onClick={handleLogout} style={{ padding: "10px 14px", color: "#ff4d4d" }}>
+                                <div className="sidebar-link" onClick={() => { setProfileMenuOpen(false); setShowLogoutConfirm(true); }} style={{ padding: "10px 14px", color: "#ff4d4d" }}>
                                     <Icons.Logout /> Log Out
                                 </div>
                             </div>
@@ -373,6 +375,15 @@ const ArtisanDashboard = () => {
                     </div>
                 )}
             </main>
+
+            <LogoutConfirmModal
+                open={showLogoutConfirm}
+                onCancel={() => setShowLogoutConfirm(false)}
+                onConfirm={async () => {
+                    setShowLogoutConfirm(false);
+                    await handleLogout();
+                }}
+            />
         </div>
     );
 };
