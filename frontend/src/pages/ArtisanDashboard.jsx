@@ -30,10 +30,8 @@ const ArtisanDashboard = () => {
     const [transactions, setTransactions] = useState([]);
     const [acceptedIds, setAcceptedIds] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    const artisanName = profile?.first_name
-        ? `${profile.first_name} ${profile.last_name || ""}`
-        : profile?.username || "Artisan";
+    const rawName = profile?.first_name || profile?.username || "Artisan";
+    const artisanName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
 
     useEffect(() => {
         if (!user) { setLoading(false); return; }
@@ -107,10 +105,10 @@ const ArtisanDashboard = () => {
 
     return (
         <div className="dashboard-layout">
-            <aside className="dashboard-sidebar" style={{ background: "#0a0a0a" }}>
-                <Link to="/" className="sidebar-logo" style={{ textDecoration: "none", marginBottom: "40px" }}>
-                    <img src={logo} alt="CraftLink Logo" style={{ width: "32px", height: "32px" }} />
-                    <span style={{ color: "var(--color-gold)" }}>Provider Hub</span>
+            <aside className="dashboard-sidebar" style={{ background: "var(--color-bg)" }}>
+                <Link to="/" className="sidebar-logo" style={{ display: 'grid', textDecoration: "none", marginBottom: "20px", justifyContent: 'middle', alignItems: 'center' }}>
+                    <img src={logo} alt="Adwuma Logo" style={{ width: "auto", height: "120px", justifyContent: 'center', alignItems: 'middle' }} />
+                    <span style={{ color: "var(--color-text-main)", justifyContent: 'center' }}>Provider Hub</span>
                 </Link>
 
                 <nav className="sidebar-menu">
