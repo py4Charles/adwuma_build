@@ -155,18 +155,18 @@ const ArtisanDashboard = () => {
             <main className="dashboard-main" style={{ background: "var(--color-surface-1)", minHeight: "100vh", color: "white" }}>
                 <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "3rem" }}>
                     <div>
-                        <h1 style={{ fontSize: "2rem", margin: "0 0 8px 0" }}>
-                            Welcome, <span style={{ color: "var(--color-gold)" }}>{artisanName}</span>
+                        <h1 style={{ fontSize: "2.5rem", margin: "0 0 8px 0", color: 'var(--color-text-main)' }}>
+                            Welcome, <span style={{ color: "var(--color-blue)" }}>{artisanName}</span>
                         </h1>
                         <p style={{ color: "#888", margin: 0 }}>
                             You are currently <span style={{ color: "#4caf50", fontWeight: "bold" }}>● Online</span> and visible to clients.
                         </p>
                     </div>
-                    <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "#111", padding: "5px 15px", borderRadius: "30px", border: "1px solid #222" }}>
-                        <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: "#333", color: "white", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "10px", background: "var(--color-blue)", padding: "10px 12px", borderRadius: "999px", border: "1px solid var(--color-text-main)" }}>
+                        <div style={{ width: "32px", height: "32px", borderRadius: "50%", background: "var(--color-blue-soft)", color: "var(--color-text-main)", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold" }}>
                             {artisanName.substring(0, 2).toUpperCase()}
                         </div>
-                        <span style={{ fontSize: "0.9rem" }}>{rating.toFixed(1)} <span style={{ color: "var(--color-gold)" }}>★</span></span>
+                        <span style={{ fontSize: "1.2rem" }}>{rating.toFixed(1)} <span style={{ color: "var(--color-bg)" }}>★</span></span>
                     </div>
                 </header>
 
@@ -174,28 +174,28 @@ const ArtisanDashboard = () => {
                 {activeTab === "Overview" && (
                     <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
                         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "1.5rem" }}>
-                            <div style={{ background: "#111", padding: "2rem", borderRadius: "20px", border: "1px solid #222" }}>
-                                <p style={{ color: "#888", marginBottom: "8px" }}>Total Earnings</p>
-                                <h2 style={{ fontSize: "2.5rem", color: "var(--color-gold)" }}>GHS {balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</h2>
-                                <p style={{ color: "#888", fontSize: "0.9rem", marginTop: "10px" }}>{balance === 0 ? "No earnings yet" : "Available balance"}</p>
+                            <div style={{ background: "var(--color-surface-3)", padding: "2rem", borderRadius: "20px", border: "1px solid var(--color-surface-2)" }}>
+                                <p style={{ color: "var(--color-text-main)", marginBottom: "8px" }}>Total Earnings</p>
+                                <h2 style={{ fontSize: "2.5rem", color: "var(--color-blue)" }}>GHS {balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</h2>
+                                <p style={{ color: "var(--color-text-dim)", fontSize: "0.9rem", marginTop: "10px" }}>{balance === 0 ? "No earnings yet" : "Available balance"}</p>
                             </div>
-                            <div style={{ background: "#111", padding: "2rem", borderRadius: "20px", border: "1px solid #222" }}>
-                                <p style={{ color: "#888", marginBottom: "8px" }}>Jobs Completed</p>
-                                <h2 style={{ fontSize: "2.5rem" }}>{jobsDone}</h2>
-                                <p style={{ color: "var(--color-gold)", fontSize: "0.9rem", marginTop: "10px" }}>{jobsDone === 0 ? "New Artisan Partner" : "Total completed"}</p>
+                            <div style={{ background: "var(--color-surface-3)", padding: "2rem", borderRadius: "20px", border: "1px solid var(--color-surface-2)" }}>
+                                <p style={{ color: "var(--color-text-main)", marginBottom: "8px" }}>Jobs Completed</p>
+                                <h2 style={{ fontSize: "2.5rem", color: 'var(--color-blue)' }}>{jobsDone}</h2>
+                                <p style={{ color: "var(--color-text-dim)", fontSize: "0.9rem", marginTop: "10px" }}>{jobsDone === 0 ? "New Artisan Partner" : "Total completed"}</p>
                             </div>
-                            <div style={{ background: "#111", padding: "2rem", borderRadius: "20px", border: "1px solid #222" }}>
+                            <div style={{ background: "var(--color-surface-3)", padding: "2rem", borderRadius: "20px", border: "1px solid var(--color-surface-2)" }}>
                                 <p style={{ color: "#888", marginBottom: "8px" }}>Open Requests</p>
-                                <h2 style={{ fontSize: "2.5rem", color: "#2196f3" }}>{openJobs.length}</h2>
-                                <p style={{ color: "#888", fontSize: "0.9rem", marginTop: "10px" }}>Available in Job Pool</p>
+                                <h2 style={{ fontSize: "2.5rem", color: "var(--color-blue)" }}>{openJobs.length}</h2>
+                                <p style={{ color: "var(--color-text-dim)", fontSize: "0.9rem", marginTop: "10px" }}>Available in Job Pool</p>
                             </div>
                         </div>
 
                         {/* Job Pool Preview */}
-                        <div style={{ background: "#111", padding: "2rem", borderRadius: "20px", border: "1px solid #222" }}>
+                        <div style={{ background: "var(--color-surface-3)", padding: "2rem", borderRadius: "20px", border: "1px solid var(--color-surface-2)" }}>
                             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "2rem" }}>
-                                <h3 style={{ margin: 0 }}>Latest Flex Requests</h3>
-                                <span style={{ color: "var(--color-gold)", cursor: "pointer", fontSize: "0.9rem" }} onClick={() => setActiveTab("Job Pool")}>View All</span>
+                                <h3 style={{ margin: 0, color: 'var(--color-text-main)' }}>Latest Flex Requests</h3>
+                                <span style={{ color: "var(--color-text-dim)", cursor: "pointer", fontSize: "0.9rem" }} onClick={() => setActiveTab("Job Pool")}>View All</span>
                             </div>
                             {loading ? (
                                 <p style={{ color: "#555" }}>Loading…</p>
@@ -204,12 +204,12 @@ const ArtisanDashboard = () => {
                             ) : (
                                 <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                                     {openJobs.slice(0, 3).map((job) => (
-                                        <div key={job.id} style={{ background: "#0a0a0a", padding: "1.5rem", borderRadius: "15px", border: "1px solid #222", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                                        <div key={job.id} style={{ background: "var(--color-surface-3)", padding: "1.5rem", borderRadius: "15px", border: "1px solid var(--color-surface-2)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                                             <div>
                                                 <h4 style={{ margin: "0 0 5px 0" }}>{job.title}</h4>
                                                 <p style={{ margin: 0, fontSize: "0.9rem", color: "#888" }}>{job.profiles?.username || "Customer"} · {job.location}</p>
                                                 {job.budget_type === "fixed" && job.budget_amount && (
-                                                    <span style={{ fontSize: "0.85rem", color: "var(--color-gold)", marginTop: "5px", display: "block" }}>
+                                                    <span style={{ fontSize: "0.85rem", color: "var(--color-blue)", marginTop: "5px", display: "block" }}>
                                                         Budget: GHS {Number(job.budget_amount).toLocaleString()}
                                                     </span>
                                                 )}
@@ -231,15 +231,15 @@ const ArtisanDashboard = () => {
                         </div>
 
                         {/* Performance */}
-                        <div style={{ background: "#111", padding: "2rem", borderRadius: "20px", border: "1px solid #222" }}>
-                            <h3 style={{ marginBottom: "2rem" }}>Performance Summary</h3>
+                        <div style={{ background: "var(--color-surface-3)", padding: "2rem", borderRadius: "20px", border: "1px solid var(--color-surface-2)" }}>
+                            <h3 style={{ marginBottom: "2rem", color: 'var(--color-text-main)' }}>Performance Summary</h3>
                             <div style={{ textAlign: "center", padding: "1rem" }}>
-                                <div style={{ fontSize: "3rem", fontWeight: "bold", color: rating > 0 ? "var(--color-gold)" : "#333" }}>
+                                <div style={{ fontSize: "3rem", fontWeight: "bold", color: rating > 0 ? "var(--color-blue)" : "#333" }}>
                                     {rating.toFixed(1)}
                                 </div>
                                 <div style={{ display: "flex", justifyContent: "center", gap: "4px", color: "var(--color-gold)", margin: "10px 0" }}>
                                     {[1, 2, 3, 4, 5].map((s) => (
-                                        <span key={s} style={{ color: rating >= s ? "var(--color-gold)" : "#333", fontSize: "1.2rem" }}>★</span>
+                                        <span key={s} style={{ color: rating >= s ? "var(--color-blue)" : "#333", fontSize: "1.2rem" }}>★</span>
                                     ))}
                                 </div>
                                 <p style={{ color: "#555" }}>{rating > 0 ? `${jobsDone} reviews` : "No reviews yet"}</p>
@@ -251,7 +251,7 @@ const ArtisanDashboard = () => {
                 {/* ─── JOB POOL ─── */}
                 {activeTab === "Job Pool" && (
                     <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-                        <h2 style={{ fontSize: "1.8rem", margin: 0 }}>Available Work Listings</h2>
+                        <h2 style={{ fontSize: "1.8rem", margin: 0, color: 'var(--color-text-main)' }}>Available Work Listings</h2>
                         {loading ? (
                             <p style={{ color: "#555" }}>Loading open requests…</p>
                         ) : openJobs.length === 0 ? (
@@ -297,16 +297,16 @@ const ArtisanDashboard = () => {
                     <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
                         <h2 style={{ fontSize: "1.8rem", margin: 0 }}>Earnings Financial Hub</h2>
                         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.5rem" }}>
-                            <div style={{ background: "#111", padding: "2rem", borderRadius: "24px", border: "1px solid #222" }}>
-                                <p style={{ color: "#888", margin: "0 0 10px 0" }}>Total Balance</p>
-                                <h2 style={{ fontSize: "2.5rem", margin: "0 0 20px 0" }}>GHS {balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</h2>
+                            <div style={{ background: "var(--color-surface-3)", padding: "2rem", borderRadius: "24px", border: "1px solid var(--color-surface-2)" }}>
+                                <p style={{ color: "var(--color-text-main)", margin: "0 0 10px 0" }}>Total Balance</p>
+                                <h2 style={{ fontSize: "2.5rem", margin: "0 0 20px 0", color: 'var(--color-blue)' }}>GHS {balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</h2>
                                 <button className="btn-primary" style={{ width: "100%", padding: "12px", opacity: balance === 0 ? 0.5 : 1 }} disabled={balance === 0}>
                                     Request Payout
                                 </button>
                             </div>
                         </div>
-                        <div style={{ background: "#111", padding: "2rem", borderRadius: "24px", border: "1px solid #222" }}>
-                            <h3 style={{ margin: "0 0 1.5rem 0" }}>Recent Transactions</h3>
+                        <div style={{ background: "var(--color-surface-3)", padding: "2rem", borderRadius: "24px", border: "1px solid var(--color-surface-2)" }}>
+                            <h3 style={{ margin: "0 0 1.5rem 0", color: 'var(--color-text-main)' }}>Recent Transactions</h3>
                             {transactions.length === 0 ? (
                                 <p style={{ color: "#555", textAlign: "center", padding: "2rem 0" }}>No transaction history available.</p>
                             ) : (
@@ -334,13 +334,13 @@ const ArtisanDashboard = () => {
                 {/* ─── PROFILE ─── */}
                 {activeTab === "Profile" && (
                     <div>
-                        <h2 style={{ fontSize: "1.8rem", margin: "0 0 2rem 0" }}>Provider Profile</h2>
-                        <div style={{ background: "#111", padding: "2rem", borderRadius: "24px", border: "1px solid #222", maxWidth: "100%" }}>
+                        <h2 style={{ fontSize: "1.8rem", margin: "0 0 2rem 0", color: 'var(--color-text-main)' }}>Provider Profile</h2>
+                        <div style={{ background: "var(--color-surface-3)", padding: "2rem", borderRadius: "24px", border: "1px solid var(--color-surface-2)", maxWidth: "100%" }}>
                             <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-                                <div style={{ width: "100px", height: "100px", borderRadius: "50%", background: "var(--color-gold)", margin: "0 auto 1rem", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2.5rem", fontWeight: "bold", color: "black" }}>
+                                <div style={{ width: "100px", height: "100px", borderRadius: "50%", background: "var(--color-blue)", margin: "0 auto 1rem", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "2.5rem", fontWeight: "bold", color: "white" }}>
                                     {artisanName.substring(0, 2).toUpperCase()}
                                 </div>
-                                <h3 style={{ margin: 0 }}>{artisanName}</h3>
+                                <h3 style={{ margin: 0, color: 'var(--color-text-main)' }}>{artisanName}</h3>
                                 <p style={{ color: "#888", margin: "4px 0" }}>{user?.email}</p>
                                 {artisanProfile && (
                                     <p style={{ color: "var(--color-gold)", margin: "4px 0", fontSize: "0.9rem" }}>
