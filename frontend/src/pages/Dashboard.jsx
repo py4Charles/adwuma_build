@@ -86,7 +86,9 @@ const Dashboard = () => {
     const [completedJobCount, setCompletedJobCount] = useState(0);
     const [notifications, setNotifications] = useState([]);
     const { user, profile } = useAuth();
-    const username = profile?.first_name || profile?.username || "User";
+    const rawName = profile?.first_name || profile?.username || "User";
+    const username = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+    const profileRole = profile?.role ? profile?.role.charAt(0).toUpperCase() + profile?.role.slice(1) : "Customer";
 
     // Load live stats from Supabase
     useEffect(() => {
@@ -395,11 +397,11 @@ const Dashboard = () => {
                                 fontWeight: '800',
                                 fontSize: '1rem'
                             }}>
-                                {username.charAt(0)}
+                                {username.charAt(0).toUpperCase()}
                             </div>
                             <div style={{ flex: 1 }}>
                                 <div style={{ color: 'var(--color-text-main)', fontWeight: 'bold', fontSize: '0.9rem' }}>{username}</div>
-                                <div style={{ color: 'var(--color-text-dim)', fontSize: '0.75rem' }}>Customer</div>
+                                <div style={{ color: 'var(--color-text-dim)', fontSize: '0.75rem' }}>{profileRole}</div>
                             </div>
                             <div style={{ color: 'var(--color-text-dim)', transform: profileMenuOpen ? 'rotate(180deg)' : 'none', transition: 'all 0.3s ease' }}>
                                 ▼
