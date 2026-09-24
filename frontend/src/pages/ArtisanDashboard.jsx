@@ -132,15 +132,15 @@ const ArtisanDashboard = () => {
                                 {artisanName.charAt(0)}
                             </div>
                             <div style={{ flex: 1 }}>
-                                <div style={{ color: "white", fontWeight: "bold", fontSize: "0.9rem" }}>{artisanName}</div>
+                                <div style={{ color: "var(--color-text-main)", fontWeight: "bold", fontSize: "0.9rem" }}>{artisanName}</div>
                                 <div style={{ color: "#4caf50", fontSize: "0.75rem" }}>● Online</div>
                             </div>
                             <div style={{ color: "#888", transform: profileMenuOpen ? "rotate(180deg)" : "none", transition: "all 0.3s" }}>▼</div>
                         </div>
 
                         {profileMenuOpen && (
-                            <div style={{ position: "absolute", bottom: "80px", left: "0", width: "100%", background: "#1a1a1a", border: "1px solid #333", borderRadius: "16px", boxShadow: "0 10px 30px rgba(0,0,0,0.5)", padding: "8px", zIndex: 1000 }}>
-                                <div className="sidebar-link" onClick={() => { setActiveTab("Profile"); setProfileMenuOpen(false); }} style={{ padding: "10px 14px", color: "#eee" }}>
+                            <div style={{ position: "absolute", bottom: "80px", left: "0", width: "100%", background: "var(--color-surface-1)", border: "1px solid var(--color-surface-3)", borderRadius: "16px", boxShadow: "0 10px 30px rgba(0,0,0,0.5)", padding: "8px", zIndex: 1000 }}>
+                                <div className="sidebar-link" onClick={() => { setActiveTab("Profile"); setProfileMenuOpen(false); }} style={{ padding: "10px 14px", color: "var(--color-text-main)" }}>
                                     <Icons.Profile /> My Profile
                                 </div>
                                 <div className="sidebar-link" onClick={() => { setProfileMenuOpen(false); setShowLogoutConfirm(true); }} style={{ padding: "10px 14px", color: "#ff4d4d" }}>
@@ -152,7 +152,7 @@ const ArtisanDashboard = () => {
                 </nav>
             </aside>
 
-            <main className="dashboard-main" style={{ background: "#050505", minHeight: "100vh", color: "white" }}>
+            <main className="dashboard-main" style={{ background: "var(--color-surface-1)", minHeight: "100vh", color: "white" }}>
                 <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "3rem" }}>
                     <div>
                         <h1 style={{ fontSize: "2rem", margin: "0 0 8px 0" }}>
