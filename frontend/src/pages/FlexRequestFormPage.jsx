@@ -204,7 +204,7 @@ const FlexRequestFormPage = () => {
                 <label style={{ display: "block", fontSize: "0.75rem", textTransform: "uppercase", color: "var(--color-blue)", fontWeight: "800", marginBottom: "8px", letterSpacing: "1px" }}>When?</label>
                 <input
                   type="datetime-local"
-                  style={{ border: 'none', fontSize: "1rem", width: "100%", color: "var(--color-text-main)", padding: 0, textDecoration: 'none' }}
+                  style={{ border: 'none', fontSize: "1rem", width: "100%", color: "var(--color-text-main)", padding: 0, pointerEvents: 'none' }}
                   value={form.scheduled_at}
                   onChange={(e) => setForm({ ...form, scheduled_at: e.target.value })}
                   required
