@@ -105,7 +105,7 @@ const ArtisanDashboard = () => {
 
     return (
         <div className="dashboard-layout">
-            <aside className="dashboard-sidebar" style={{ background: "var(--color-bg)" }}>
+            <aside className="dashboard-sidebar" style={{ background: "var(--color-surface-2)" }}>
                 <Link to="/" className="sidebar-logo" style={{ display: 'flex', flexDirection: 'column', textDecoration: "none", marginBottom: "20px", gap: "0" }}>
                     <img src={logo} alt="Adwuma Logo" style={{ width: "auto", height: "120px", objectFit: 'contain' }} />
                     <span style={{ color: "var(--color-text-main)", lineHeight: "1", marginTop: "-8px", fontSize: '1.2rem' }}>Provider Hub</span>
@@ -152,7 +152,7 @@ const ArtisanDashboard = () => {
                 </nav>
             </aside>
 
-            <main className="dashboard-main" style={{ background: "var(--color-surface-1)", minHeight: "100vh", color: "white" }}>
+            <main className="dashboard-main" style={{ background: "var(--color-bg)", minHeight: "100vh", color: "white" }}>
                 <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "3rem" }}>
                     <div>
                         <h1 style={{ fontSize: "2.5rem", margin: "0 0 8px 0", color: 'var(--color-text-main)' }}>
@@ -295,7 +295,7 @@ const ArtisanDashboard = () => {
                 {/* ─── EARNINGS ─── */}
                 {activeTab === "Earnings" && (
                     <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-                        <h2 style={{ fontSize: "1.8rem", margin: 0 }}>Earnings Financial Hub</h2>
+                        <h2 style={{ fontSize: "1.8rem", margin: 0, color: 'var(--color-text-main)'}}>Earnings Financial Hub</h2>
                         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "1.5rem" }}>
                             <div style={{ background: "var(--color-surface-3)", padding: "2rem", borderRadius: "24px", border: "1px solid var(--color-surface-2)" }}>
                                 <p style={{ color: "var(--color-text-main)", margin: "0 0 10px 0" }}>Total Balance</p>
