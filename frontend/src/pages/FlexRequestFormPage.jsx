@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/components.css";
 import { useAuth } from "../context/AuthContext.jsx";
@@ -12,6 +12,8 @@ const FlexRequestFormPage = () => {
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [locations, setLocations] = useState([]);
+  const [showLocationInput, setShowLocationInput] = useState(false);
+  const whenInputRef = useRef(null);
 
   useEffect(() => {
     async function fetchSavedLocations() {
@@ -67,6 +69,58 @@ const FlexRequestFormPage = () => {
 
     navigate("/flex-match");
   };
+
+  const saveLocation = async (place) => {
+    const trimmed = place.trim();
+    if (!trimmed) return;
+    if (locations.includes(trimmed)) {
+      setForm({ ...form, location: trimmed });
+      return;
+    }
+    const next = [...locations, trimmed];
+    setLocations(next);
+    setForm({ ...form, location: trimmed });
+    if (user) {
+      const { error: saveError } = await profilesApi.update(user.id, { saved_locations: next });
+      if (saveError) setError(saveError.message);
+    }
+  };
+
+  const openDatePicker = () => {
+    whenInputRef.current?.showPicker?.();
+  };
+
+  const formatScheduledAt = (value) => {
+    if (!value) return "Pick a date and time";
+    const [date, time] = value.split("T");
+    const [y, m, d] = date.split("-").map(Number);
+    const [hh, mm] = (time || "00:00").split(":").map(Number);
+    const suffix = hh >= 12 ? "PM" : "AM";
+    const hour12 = hh % 12 === 0 ? 12 : hh % 12;
+    return `${new Date(y, m - 1, d).toLocaleDateString(undefined, { weekday: "short", day: "numeric", month: "short" })} · ${hour12}:${String(mm).padStart(2, "0")} ${suffix}`;
+  };
+
+  const buildQuickTimes = () => {
+    const slots = [];
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+
+    const at = (dayOffset, hour) => {
+      const d = new Date(startOfToday);
+      d.setDate(d.getDate() + dayOffset);
+      const pad = (n) => String(n).padStart(2, "0");
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(hour)}:00`;
+    };
+
+    const nowHour = new Date().getHours();
+    if (nowHour < 18) slots.push({ label: "Today, 4 PM", value: at(0, 16) });
+    slots.push({ label: "Tomorrow, 9 AM", value: at(1, 9) });
+    if (nowHour < 15) slots.push({ label: "Tomorrow, 2 PM", value: at(1, 14) });
+    slots.push({ label: "This weekend, 10 AM", value: at(((6 - startOfToday.getDay()) + 7) % 7 || 7, 10) });
+    return slots;
+  };
+
+  const quickTimes = buildQuickTimes();
 
   return (
     <div style={{ background: "var(--color-bg)", minHeight: "100vh", color: "var(--color-bg)", fontFamily: "inherit" }}>
@@ -192,19 +246,62 @@ const FlexRequestFormPage = () => {
             <div style={{ background: "var(--color-surface)", borderRadius: "20px", padding: "1.5rem", display: "flex", justifyContent: "space-between", alignItems: "center", border: "1px solid var(--color-border)" }}>
               <div style={{ flex: 1 }}>
                 <label style={{ display: "block", fontSize: "0.75rem", textTransform: "uppercase", color: "var(--color-blue)", fontWeight: "800", marginBottom: "8px", letterSpacing: "1px" }}>Where?</label>
-                <input
-                  type="text"
-                  placeholder="Street address or Landmark"
-                  style={{ background: "transparent", border: "none", outline: "none", fontSize: "1.15rem", width: "100%", color: "var(--color-text-main)", padding: 0 }}
-                  value={form.location}
-                  onChange={(e) => setForm({ ...form, location: e.target.value })}
-                  required
-                />
+                {showLocationInput || locations.length === 0 ? (
+                  <input
+                    type="text"
+                    placeholder="Street address or Landmark"
+                    style={{ background: "transparent", border: "none", outline: "none", fontSize: "1.15rem", width: "100%", color: "var(--color-text-main)", padding: 0 }}
+                    value={form.location}
+                    onChange={(e) => setForm({ ...form, location: e.target.value })}
+                    onBlur={(e) => saveLocation(e.target.value)}
+                    required
+                  />
+                ) : (
+                  <div style={{ fontSize: "1.05rem", fontWeight: "700", color: form.location ? "var(--color-text-main)" : "var(--color-text-dim)" }}>
+                    {form.location || "Choose a saved place or type a new one"}
+                  </div>
+                )}
               </div>
-              <div style={{ background: "rgb(51, 51, 209)", width: "45px", height: "45px", borderRadius: "14px", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--color-bg)" }}>
+              <button
+                type="button"
+                onClick={() => setShowLocationInput((prev) => !prev)}
+                aria-label="Change location"
+                style={{ background: "rgb(51, 51, 209)", width: "45px", height: "45px", minWidth: "45px", borderRadius: "14px", border: "none", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--color-bg)", cursor: "pointer" }}
+              >
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
-              </div>
+              </button>
             </div>
+
+            {locations.length > 0 && (
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "0.75rem" }}>
+                {locations.map((place) => (
+                  <button
+                    type="button"
+                    key={place}
+                    onClick={() => { setForm({ ...form, location: place }); setShowLocationInput(false); }}
+                    style={{
+                      padding: "8px 16px", borderRadius: "999px", cursor: "pointer", fontSize: "0.85rem", transition: "all 0.3s ease",
+                      background: form.location === place ? "rgb(51, 51, 209)" : "var(--color-surface)",
+                      color: form.location === place ? "var(--color-bg)" : "var(--color-text-dim)",
+                      border: form.location === place ? "1px solid var(--color-blue)" : "1px solid var(--color-border)",
+                    }}
+                  >
+                    {place}
+                  </button>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => setShowLocationInput(true)}
+                  style={{
+                    padding: "8px 16px", borderRadius: "999px", cursor: "pointer", fontSize: "0.85rem",
+                    background: "transparent", color: "var(--color-text-muted)",
+                    border: "1px dashed var(--color-border)",
+                  }}
+                >
+                  + Another place
+                </button>
+              </div>
+            )}
           </div>
 
           {/* When */}
@@ -212,18 +309,49 @@ const FlexRequestFormPage = () => {
             <div style={{ background: "var(--color-surface)", borderRadius: "20px", padding: "1.5rem", display: "flex", justifyContent: "space-between", alignItems: "center", border: "1px solid var(--color-border)" }}>
               <div style={{ flex: 1 }}>
                 <label style={{ display: "block", fontSize: "0.75rem", textTransform: "uppercase", color: "var(--color-blue)", fontWeight: "800", marginBottom: "8px", letterSpacing: "1px" }}>When?</label>
+                <div style={{ fontSize: "1.05rem", fontWeight: "700", color: form.scheduled_at ? "var(--color-text-main)" : "var(--color-text-dim)" }}>
+                  {formatScheduledAt(form.scheduled_at)}
+                </div>
                 <input
+                  ref={whenInputRef}
                   type="datetime-local"
-                  style={{ border: 'none', fontSize: "1rem", width: "100%", color: "var(--color-text-main)", padding: 0, pointerEvents: 'none' }}
+                  aria-label="Choose a date and time"
+                  tabIndex={-1}
+                  style={{ position: "absolute", width: "1px", height: "1px", padding: 0, border: "none", opacity: 0, pointerEvents: "none" }}
                   value={form.scheduled_at}
                   onChange={(e) => setForm({ ...form, scheduled_at: e.target.value })}
                   required
                 />
               </div>
-              <div style={{ background: "rgb(51, 51, 209)", width: "45px", height: "45px", borderRadius: "14px", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--color-bg)" }}>
+              <button
+                type="button"
+                onClick={openDatePicker}
+                aria-label="Change date and time"
+                style={{ background: "rgb(51, 51, 209)", width: "45px", height: "45px", minWidth: "45px", borderRadius: "14px", border: "none", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--color-bg)", cursor: "pointer" }}
+              >
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
-              </div>
+              </button>
             </div>
+
+            {quickTimes.length > 0 && (
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "0.75rem" }}>
+                {quickTimes.map((slot) => (
+                  <button
+                    type="button"
+                    key={slot.value}
+                    onClick={() => setForm({ ...form, scheduled_at: slot.value })}
+                    style={{
+                      padding: "8px 16px", borderRadius: "999px", cursor: "pointer", fontSize: "0.85rem", transition: "all 0.3s ease",
+                      background: form.scheduled_at === slot.value ? "rgb(51, 51, 209)" : "var(--color-surface)",
+                      color: form.scheduled_at === slot.value ? "var(--color-bg)" : "var(--color-text-dim)",
+                      border: form.scheduled_at === slot.value ? "1px solid var(--color-blue)" : "1px solid var(--color-border)",
+                    }}
+                  >
+                    {slot.label}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Submit */}
