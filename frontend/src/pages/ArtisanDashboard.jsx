@@ -3,8 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/dashboard.css";
 import logo from "../assets/icon.png";
 import { useAuth } from "../context/AuthContext.jsx";
-import { authApi, artisansApi, requestsApi } from "../lib/supabase.js";
+import { useToast } from "../context/ToastContext.jsx";
+import { authApi, artisansApi, requestsApi, walletApi } from "../lib/supabase.js";
 import LogoutConfirmModal from "../components/LogoutConfirmModal.jsx";
+import ArtisanProfileForm from "../components/ArtisanProfileForm.jsx";
 
 const Icons = {
     Dashboard: () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /></svg>,
@@ -18,6 +20,7 @@ const Icons = {
 const ArtisanDashboard = () => {
     const navigate = useNavigate();
     const { user, profile } = useAuth();
+    const { addToast } = useToast();
     const [activeTab, setActiveTab] = useState("Overview");
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
@@ -29,6 +32,7 @@ const ArtisanDashboard = () => {
     const [wallet, setWallet] = useState(null);
     const [transactions, setTransactions] = useState([]);
     const [acceptedIds, setAcceptedIds] = useState([]);
+    const [claimErrors, setClaimErrors] = useState({});
     const [loading, setLoading] = useState(true);
     const rawName = profile?.first_name || profile?.username || "Artisan";
     const artisanName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
@@ -45,7 +49,7 @@ const ArtisanDashboard = () => {
             ]);
             setArtisanProfile(ap);
             setOpenJobs(jobs || []);
-            // setWallet(w);
+            setWallet(w);
             setTransactions(txns || []);
             setLoading(false);
         };
@@ -54,22 +58,32 @@ const ArtisanDashboard = () => {
 
     const handleAcceptJob = async (jobId) => {
         if (!artisanProfile) {
-            alert("You need to complete your artisan profile first.");
             setActiveTab("Profile");
             return;
         }
         setAcceptedIds((prev) => [...prev, jobId]);
-        const { error } = await requestsApi.update(jobId, {
-            artisan_id: artisanProfile.id,
-            status: "in_progress",
-        });
-        if (!error) {
-            setOpenJobs((prev) => prev.filter((j) => j.id !== jobId));
-            alert("Job accepted! The customer has been notified.");
-        } else {
+        setClaimErrors((prev) => ({ ...prev, [jobId]: "" }));
+
+        // compare-and-swap in SQL: only one provider can move a row out of
+        // 'pending'. `claimed: false` means someone else got it first.
+        const { claimed, error } = await requestsApi.claim(jobId, artisanProfile.id);
+
+        if (error) {
             setAcceptedIds((prev) => prev.filter((id) => id !== jobId));
-            alert("Failed to accept job. Please try again.");
+            setClaimErrors((prev) => ({ ...prev, [jobId]: "Could not accept this job. Please try again." }));
+            return;
         }
+
+        if (!claimed) {
+            // The card is gone from the pool, so a per-card message could never
+            // render. Surface the loss in a toast instead.
+            setAcceptedIds((prev) => prev.filter((id) => id !== jobId));
+            setOpenJobs((prev) => prev.filter((j) => j.id !== jobId));
+            addToast("Job was just been taken.", "error");
+            return;
+        }
+
+        setOpenJobs((prev) => prev.filter((j) => j.id !== jobId));
     };
 
     const handleLogout = async () => {
@@ -206,8 +220,8 @@ const ArtisanDashboard = () => {
                                     {openJobs.slice(0, 3).map((job) => (
                                         <div key={job.id} style={{ background: "var(--color-surface-3)", padding: "1.5rem", borderRadius: "15px", border: "1px solid var(--color-surface-2)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                                             <div>
-                                                <h4 style={{ margin: "0 0 5px 0" }}>{job.title}</h4>
-                                                <p style={{ margin: 0, fontSize: "0.9rem", color: "#888" }}>{job.profiles?.username || "Customer"} · {job.location}</p>
+                                                <h4 style={{ margin: '0 0 5px 0' }}>{job.title}</h4>
+                                                <p style={{ margin: 0, fontSize: '0.9rem', color: "#888" }}>{job.profiles?.username || "Customer"} · {job.location}</p>
                                                 {job.budget_type === "fixed" && job.budget_amount && (
                                                     <span style={{ fontSize: "0.85rem", color: "var(--color-blue)", marginTop: "5px", display: "block" }}>
                                                         Budget: GHS {Number(job.budget_amount).toLocaleString()}
@@ -215,6 +229,11 @@ const ArtisanDashboard = () => {
                                                 )}
                                                 {job.budget_type === "open" && (
                                                     <span style={{ fontSize: "0.85rem", color: "#888", marginTop: "5px", display: "block" }}>Open to offers</span>
+                                                )}
+                                                {claimErrors[job.id] && (
+                                                    <span style={{ fontSize: "0.8rem", color: "#f44336", marginTop: "5px", display: "block" }}>
+                                                        {claimErrors[job.id]}
+                                                    </span>
                                                 )}
                                             </div>
                                             <button
@@ -276,6 +295,11 @@ const ArtisanDashboard = () => {
                                                         ? `GHS ${Number(job.budget_amount).toLocaleString()}`
                                                         : "Open to offers"}
                                                 </strong>
+                                                {claimErrors[job.id] && (
+                                                    <span style={{ fontSize: "0.8rem", color: "#f44336", marginTop: "6px", display: "block" }}>
+                                                        {claimErrors[job.id]}
+                                                    </span>
+                                                )}
                                             </div>
                                             <button
                                                 style={{ padding: "10px 20px", background: acceptedIds.includes(job.id) ? "#4caf50" : "var(--color-gold)", color: "black", border: "none", borderRadius: "12px", cursor: "pointer", fontWeight: "bold" }}
@@ -364,9 +388,8 @@ const ArtisanDashboard = () => {
                                     </div>
                                 </div>
                             ) : (
-                                <div style={{ textAlign: "center", padding: "2rem", color: "#555", border: "1px dashed #333", borderRadius: "16px" }}>
-                                    <p>Complete your artisan profile to start receiving job requests.</p>
-                                    <p style={{ fontSize: "0.85rem" }}>Contact support to get your profile verified.</p>
+                                <div style={{ background: "var(--color-surface-3)", padding: "2rem", borderRadius: "24px", border: "1px solid var(--color-surface-2)", maxWidth: "100%" }}>
+                                    <ArtisanProfileForm onSaved={(saved) => setArtisanProfile(saved)} />
                                 </div>
                             )}
                         </div>

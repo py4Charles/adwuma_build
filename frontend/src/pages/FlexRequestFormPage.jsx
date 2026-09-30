@@ -47,7 +47,7 @@ const FlexRequestFormPage = () => {
     setSubmitting(true);
     setError("");
 
-    const { error: reqError } = await requestsApi.create({
+    const { error: reqError, data: created } = await requestsApi.create({
       customer_id: user.id,
       request_type: "flex",
       subcategory: selectedService,
@@ -67,7 +67,10 @@ const FlexRequestFormPage = () => {
       return;
     }
 
-    navigate("/flex-match");
+    // The chat/matching screens are keyed by the real request id. Without it
+    // they have nothing to route with, and messages.request_id (a uuid
+    // column) rejects a human-readable code like "REQ-1099".
+    navigate(`/flex-match?request=${encodeURIComponent(created.id)}`);
   };
 
   const saveLocation = async (place) => {
