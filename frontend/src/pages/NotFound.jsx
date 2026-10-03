@@ -11,7 +11,8 @@ const NotFound = () => {
                 <div className="notfound-content">
                     <h1 className="notfound-code"> 404 </h1>
                     <h3 className="notfound-title"> Page not Found </h3>
-                    <p className="notfound-message">
+                    <p className="notfound-message"
+                    style={{letterSpacing: '0.5px'}}>
                         Sorry, we couldn't find the page you're searching for... <br />
                         It may have been moved, deleted or never existed
                     </p>

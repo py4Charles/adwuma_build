@@ -15,8 +15,13 @@ create table if not exists public.profiles (
   address      text,
   avatar_url   text,
   role         text not null default 'customer' check (role in ('customer', 'provider')),
+  saved_locations jsonb default '[]'::jsonb,
   created_at   timestamptz default now()
 );
+
+-- Saved places on existing profiles (safe to re-run)
+alter table public.profiles
+  add column if not exists saved_locations jsonb default '[]'::jsonb;
 
 -- Auto-create a profile row when a new user signs up
 create or replace function public.handle_new_user()
