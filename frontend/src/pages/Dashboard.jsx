@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import MyRequestsPage from "./MyRequestsPage";
 import WalletPage from "./WalletPage.jsx";
 import ComplaintsPage from "./ComplaintsPage.jsx";
 import AccountSettingsPage from "./AccountSettingsPage.jsx";
+import LogoutConfirmModal from "../components/LogoutConfirmModal.jsx";
 
 import logo from "../assets/icon.png";
 import "../styles/dashboard.css";
@@ -79,11 +80,15 @@ const Dashboard = () => {
     const [sortBy, setSortBy] = useState("Recommended");
     const [visibleArtisans, setVisibleArtisans] = useState(12);
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+    const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+    const profileMenuRef = useRef(null);
     const [activeRequestCount, setActiveRequestCount] = useState(0);
     const [completedJobCount, setCompletedJobCount] = useState(0);
     const [notifications, setNotifications] = useState([]);
     const { user, profile } = useAuth();
-    const username = profile?.first_name || profile?.username || "User";
+    const rawName = profile?.first_name || profile?.username || "User";
+    const username = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+    const profileRole = profile?.role ? profile?.role.charAt(0).toUpperCase() + profile?.role.slice(1) : "Customer";
 
     // Load live stats from Supabase
     useEffect(() => {
@@ -103,6 +108,18 @@ const Dashboard = () => {
         };
         loadStats();
     }, [user]);
+
+    // Close profile dropdown when clicking outside of it
+    useEffect(() => {
+        if (!profileMenuOpen) return;
+        const handleClickOutside = (e) => {
+            if (profileMenuRef.current && !profileMenuRef.current.contains(e.target)) {
+                setProfileMenuOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [profileMenuOpen]);
 
     // Reset pagination when filters change
     useEffect(() => {
@@ -299,6 +316,13 @@ const Dashboard = () => {
         navigate("/");
     };
 
+    const confirmLogout = () => {
+        authApi.signOut().then(() => {
+            setShowLogoutConfirm(false);
+            handleLogout();
+        });
+    };
+
     const handleNavClick = (name) => {
         if (name === "Log Out") {
             authApi.signOut().then(() => handleLogout());
@@ -318,9 +342,9 @@ const Dashboard = () => {
         <div className="dashboard-layout">
             {/* SIDEBAR NAVIGATION (LEFT SIDE) */}
             <aside className="dashboard-sidebar">
-                <Link to="/" className="sidebar-logo" style={{ textDecoration: 'none' }}>
+                <Link to="/" className="sidebar-logo" style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none' }}>
                     <img src={logo} alt="Adwuma Logo" style={{ width: 'auto', height: '120px', objectFit: 'contain' }} />
-                    {/* <span>Adwuma</span> */}
+                    <span style={{ color: "var(--color-text-main)", lineHeight: "1", marginTop: "-8px", fontSize: '1.2rem' }}>Customer Hub</span>
                 </Link>
 
                 <nav className="sidebar-menu">
@@ -347,7 +371,7 @@ const Dashboard = () => {
                     ))}
 
                     {/* User Account Section at Bottom */}
-                    <div style={{ marginTop: 'auto', borderTop: '1px solid var(--color-surface-3)', paddingTop: '20px', position: 'relative' }}>
+                    <div ref={profileMenuRef} style={{ marginTop: 'auto', borderTop: '1px solid var(--color-surface-3)', paddingTop: '20px', position: 'relative' }}>
                         <div
                             onClick={() => setProfileMenuOpen(!profileMenuOpen)}
                             style={{
@@ -373,11 +397,11 @@ const Dashboard = () => {
                                 fontWeight: '800',
                                 fontSize: '1rem'
                             }}>
-                                {username.charAt(0)}
+                                {username.charAt(0).toUpperCase()}
                             </div>
                             <div style={{ flex: 1 }}>
                                 <div style={{ color: 'var(--color-text-main)', fontWeight: 'bold', fontSize: '0.9rem' }}>{username}</div>
-                                <div style={{ color: 'var(--color-text-dim)', fontSize: '0.75rem' }}>Customer</div>
+                                <div style={{ color: 'var(--color-text-dim)', fontSize: '0.75rem' }}>{profileRole}</div>
                             </div>
                             <div style={{ color: 'var(--color-text-dim)', transform: profileMenuOpen ? 'rotate(180deg)' : 'none', transition: 'all 0.3s ease' }}>
                                 ▼
@@ -414,7 +438,7 @@ const Dashboard = () => {
                                 </div>
                                 <div
                                     className="sidebar-link"
-                                    onClick={() => handleLogout()}
+                                    onClick={() => { setProfileMenuOpen(false); setShowLogoutConfirm(true); }}
                                     style={{ padding: '10px 14px', color: '#ff4d4d' }}
                                 >
                                     <Icons.Logout /> Log Out
@@ -1054,6 +1078,12 @@ const Dashboard = () => {
                     </section>
                 )}
             </main>
+
+            <LogoutConfirmModal
+                open={showLogoutConfirm}
+                onCancel={() => setShowLogoutConfirm(false)}
+                onConfirm={confirmLogout}
+            />
         </div>
     );
 };
