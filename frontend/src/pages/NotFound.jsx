@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar.jsx";
-import Footer from "../components/Footer.jsx";
 import "../styles/components.css";
 
 const NotFound = () => {
@@ -9,7 +7,7 @@ const NotFound = () => {
             {/* <Navbar /> */}
             <main className="notfound-container">
                 <div className="notfound-content">
-                    <h1 className="notfound-code"> 404 </h1>
+                    <h1 className="notfound-code"> <span style={{color: 'var(--color-danger-light)'}}>404!</span> </h1>
                     <h3 className="notfound-title"> Page not Found </h3>
                     <p className="notfound-message"
                     style={{letterSpacing: '0.5px'}}>
