@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 
 import { useAuth } from "../context/AuthContext.jsx";
-import { requestsApi } from "../lib/supabase.js";
+import { profilesApi, requestsApi } from "../lib/supabase.js";
 import "../styles/components.css";
+
+const chipStyle = (active) => ({
+    padding: "8px 16px",
+    borderRadius: "999px",
+    cursor: "pointer",
+    fontSize: "0.85rem",
+    transition: "all 0.3s ease",
+    background: active ? "rgb(51, 51, 209)" : "var(--color-surface)",
+    color: active ? "var(--color-bg)" : "var(--color-text-dim)",
+    border: active ? "1px solid var(--color-blue)" : "1px solid var(--color-border)",
+});
 
 const ServiceRequestPage = () => {
     const navigate = useNavigate();
@@ -18,6 +29,18 @@ const ServiceRequestPage = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
     const [error, setError] = useState("");
+    const [locations, setLocations] = useState([]);
+    const [showLocationInput, setShowLocationInput] = useState(false);
+    const whenInputRef = useRef(null);
+
+    useEffect(() => {
+        async function fetchSavedLocations() {
+            if (!user) return;
+            const { data } = await profilesApi.get(user.id);
+            setLocations(data?.saved_locations || []);
+        };
+        fetchSavedLocations();
+    }, [user])
 
     const [form, setForm] = useState({
         category: "",
@@ -28,6 +51,58 @@ const ServiceRequestPage = () => {
     });
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+    const saveLocation = async (place) => {
+        const trimmed = place.trim();
+        if (!trimmed) return;
+        if (locations.includes(trimmed)) {
+            setForm({ ...form, location: trimmed });
+            return;
+        }
+        const next = [...locations, trimmed];
+        setLocations(next);
+        setForm({ ...form, location: trimmed });
+        if (user) {
+            const { error: saveError } = await profilesApi.update(user.id, { saved_locations: next });
+            if (saveError) setError(saveError.message);
+        }
+    };
+
+    const openDatePicker = () => {
+        whenInputRef.current?.showPicker?.();
+    };
+
+    const formatScheduledAt = (value) => {
+        if (!value) return "Pick a date and time";
+        const [date, time] = value.split("T");
+        const [y, m, d] = date.split("-").map(Number);
+        const [hh, mm] = (time || "00:00").split(":").map(Number);
+        const suffix = hh >= 12 ? "PM" : "AM";
+        const hour12 = hh % 12 === 0 ? 12 : hh % 12;
+        return `${new Date(y, m - 1, d).toLocaleDateString(undefined, { weekday: "short", day: "numeric", month: "short" })} · ${hour12}:${String(mm).padStart(2, "0")} ${suffix}`;
+    };
+
+    const buildQuickTimes = () => {
+        const slots = [];
+        const startOfToday = new Date();
+        startOfToday.setHours(0, 0, 0, 0);
+
+        const at = (dayOffset, hour) => {
+            const d = new Date(startOfToday);
+            d.setDate(d.getDate() + dayOffset);
+            const pad = (n) => String(n).padStart(2, "0");
+            return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(hour)}:00`;
+        };
+
+        const nowHour = new Date().getHours();
+        if (nowHour < 18) slots.push({ label: "Today, 4 PM", value: at(0, 16) });
+        slots.push({ label: "Tomorrow, 9 AM", value: at(1, 9) });
+        if (nowHour < 15) slots.push({ label: "Tomorrow, 2 PM", value: at(1, 14) });
+        slots.push({ label: "This weekend, 10 AM", value: at(((6 - startOfToday.getDay()) + 7) % 7 || 7, 10) });
+        return slots;
+    };
+
+    const quickTimes = buildQuickTimes();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -104,28 +179,113 @@ const ServiceRequestPage = () => {
                         </div>
 
                         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem", marginBottom: "24px" }}>
-                            <div className="form-group" style={{ marginBottom: 0 }}>
-                                <label className="form-label">Location / Address</label>
-                                <input
-                                    type="text"
-                                    name="location"
-                                    placeholder="e.g. East Legon, Accra"
-                                    className="form-input"
-                                    value={form.location}
-                                    onChange={handleChange}
-                                    required
-                                />
+                            <div style={{ marginBottom: 0 }}>
+                                <div className="form-group">
+                                    <label className="form-label">Location / Address</label>
+                                    {showLocationInput || locations.length === 0 ? (
+                                        <input
+                                            type="text"
+                                            name="location"
+                                            placeholder="e.g. East Legon, Accra"
+                                            className="form-input"
+                                            value={form.location}
+                                            onChange={handleChange}
+                                            onBlur={(e) => saveLocation(e.target.value)}
+                                            required
+                                        />
+                                    ) : (
+                                        <div
+                                            role="button"
+                                            tabIndex={0}
+                                            onClick={() => setShowLocationInput(true)}
+                                            className="form-input"
+                                            style={{
+                                                display: "flex", alignItems: "center", cursor: "pointer",
+                                                color: form.location ? "var(--color-text-main)" : "var(--color-text-dim)",
+                                            }}
+                                        >
+                                            {form.location || "Choose a saved place or type a new one"}
+                                        </div>
+                                    )}
+                                </div>
+
+                                {locations.length > 0 && (
+                                    <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "0.5rem" }}>
+                                        {locations.map((place) => (
+                                            <button
+                                                type="button"
+                                                key={place}
+                                                onClick={() => { setForm({ ...form, location: place }); setShowLocationInput(false); }}
+                                                style={chipStyle(form.location === place)}
+                                            >
+                                                {place}
+                                            </button>
+                                        ))}
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowLocationInput(true)}
+                                            style={{ ...chipStyle(false), background: "transparent", border: "1px dashed var(--color-border)" }}
+                                        >
+                                            + Another
+                                        </button>
+                                    </div>
+                                )}
                             </div>
-                            <div className="form-group" style={{ marginBottom: 0 }}>
-                                <label className="form-label">Preferred Date & Time</label>
-                                <input
-                                    type="datetime-local"
-                                    name="scheduled_at"
-                                    className="form-input"
-                                    value={form.scheduled_at}
-                                    onChange={handleChange}
-                                    required
-                                />
+
+                            <div style={{ marginBottom: 0 }}>
+                                <div className="form-group">
+                                    <label className="form-label">Preferred Date &amp; Time</label>
+                                    <div style={{ display: "flex", gap: "0.75rem", alignItems: "stretch" }}>
+                                        <div
+                                            role="button"
+                                            tabIndex={0}
+                                            onClick={openDatePicker}
+                                            className="form-input"
+                                            style={{
+                                                flex: 1, display: "flex", alignItems: "center", cursor: "pointer", marginBottom: 0,
+                                                color: form.scheduled_at ? "var(--color-text-main)" : "var(--color-text-dim)",
+                                            }}
+                                        >
+                                            {formatScheduledAt(form.scheduled_at)}
+                                        </div>
+                                        <button
+                                            type="button"
+                                            onClick={openDatePicker}
+                                            aria-label="Change date and time"
+                                            style={{
+                                                width: "52px", minWidth: "52px", borderRadius: "14px", border: "none", cursor: "pointer",
+                                                background: "rgb(51, 51, 209)", color: "var(--color-bg)",
+                                                display: "flex", alignItems: "center", justifyContent: "center",
+                                            }}
+                                        >
+                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
+                                        </button>
+                                    </div>
+                                    <input
+                                        ref={whenInputRef}
+                                        type="datetime-local"
+                                        name="scheduled_at"
+                                        aria-label="Choose a date and time"
+                                        tabIndex={-1}
+                                        style={{ position: "absolute", width: "1px", height: "1px", padding: 0, border: "none", opacity: 0, pointerEvents: "none" }}
+                                        value={form.scheduled_at}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                </div>
+
+                                <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "0.5rem" }}>
+                                    {quickTimes.map((slot) => (
+                                        <button
+                                            type="button"
+                                            key={slot.value}
+                                            onClick={() => setForm({ ...form, scheduled_at: slot.value })}
+                                            style={chipStyle(form.scheduled_at === slot.value)}
+                                        >
+                                            {slot.label}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
                         </div>
 
