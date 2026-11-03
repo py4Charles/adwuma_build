@@ -21,7 +21,7 @@ const AboutPage = () => {
                 <section className="text-section">
                     <h2>Our Mission</h2>
                     <p>
-                        At CraftLink, our mission is to build a reliable and seamless marketplace where
+                        At Adwuma, our mission is to build a reliable and seamless marketplace where
                         skilled artisans and everyday customers can connect. We believe that finding a reliable
                         plumber, a creative digital marketer, or an expert electrician shouldn't be a gamble.
                     </p>
@@ -42,7 +42,7 @@ const AboutPage = () => {
                         <div className="feature-item">
                             <span className="feature-icon">⚡</span>
                             <h3>Instant Booking</h3>
-                            <p>Use CraftLink Flex to quickly request exactly what you need in seconds.</p>
+                            <p>Use Adwuma Flex to quickly request exactly what you need in seconds.</p>
                         </div>
                         <div className="feature-item">
                             <span className="feature-icon">⭐</span>
