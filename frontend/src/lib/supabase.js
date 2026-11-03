@@ -135,9 +135,28 @@ export const requestsApi = {
             .order('created_at', { ascending: false });
     },
 
-    /** Update request (e.g. assign artisan, change status) */
+    /** Update request (e.g. change status) */
     update: async (id, updates) => {
         return supabase.from('service_requests').update(updates).eq('id', id);
+    },
+
+    /**
+     * Atomically claim an open flex request.
+     * Delegates to the `claim_request` SQL function, which does a
+     * compare-and-swap on `artisan_id is null`. Two providers accepting the
+     * same job at once cannot both win: the loser gets `claimed: false`.
+     */
+    claim: async (requestId, artisanProfileId) => {
+        const { data, error } = await supabase.rpc('claim_request', {
+            p_request_id: requestId,
+            p_artisan_profile_id: artisanProfileId,
+        });
+
+        if (error) return { data: null, claimed: false, error };
+
+        // The function returns the updated row on success and NULL when the
+        // update matched zero rows (someone else claimed it first).
+        return { data: data ?? null, claimed: !!data, error: null };
     },
 };
 
